@@ -67,6 +67,9 @@
                                             <p>{{ $quiz->subject }}</p>
                                         </td>
                                         <td class="v-align-middle">
+                                            <p>{{ $quiz->getUser->name }}</p>
+                                        </td>
+                                        <td class="v-align-middle">
                                             <div class="btn-group">
                                                 <a href="{{ URL::route('quizzes.edit', ['id' => $quiz->id]) }}">
                                                     <button type="button" class="btn btn-success">
