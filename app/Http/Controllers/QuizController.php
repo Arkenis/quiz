@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Quiz;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +16,9 @@ class QuizController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $quizzes = Quiz::all();
+
+        return view('quiz.index', compact('quizzes'));
     }
 
     /**
@@ -26,7 +28,7 @@ class QuizController extends Controller
      */
     public function create()
     {
-        //
+        return view('quiz.form');
     }
 
     /**
@@ -37,7 +39,9 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Quiz::create($request->all());
+
+        return \Redirect::route('quizzes.index');
     }
 
     /**
@@ -57,9 +61,10 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Quiz $quiz)
     {
-        //
+
+        return view('quiz.form', compact('quiz'));
     }
 
     /**
@@ -69,9 +74,12 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Quiz $quiz)
     {
-        //
+
+        $quiz->update($request->all());
+
+        return \Redirect::route('quizzes.index');
     }
 
     /**
@@ -80,8 +88,11 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($quiz)
     {
-        //
+
+        $quiz->delete();
+
+        return \Redirect::route('quizzes.index');
     }
 }
