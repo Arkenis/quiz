@@ -57,11 +57,11 @@
               <div class="row">
                 <div class="col-sm-12">
                   <div class="form-group form-group-default">
-                    <label>Kullanıcı adı</label>
+                    <label>Ulanyjynyñ ady</label>
                     <input type="text" name="username" autocomplete="off" class="form-control" required>
                   </div>
                   <div class="form-group form-group-default">
-                    <label>Parola</label>
+                    <label>Açar sözi</label>
                     <input type="password" name="password" autocomplete="off" autocomplete="off" class="form-control" required>
                   </div>
 
