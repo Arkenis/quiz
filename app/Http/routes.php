@@ -4,6 +4,8 @@ Route::controllers(['auth' => 'Auth\AuthController']);
 
 Route::group(['middleware' => 'auth'], function() {
 
+    Route::resource('users', 'UserController');
+
     Route::get('/', function () {
         return view('welcome');
     });

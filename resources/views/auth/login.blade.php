@@ -39,7 +39,6 @@
       <div class="container-sm-height full-height">
         <div class="row row-sm-height">
           <div class="col-sm-12 col-sm-height col-middle">
-            <img src="{{ asset('pages/assets/img/logo.svg') }}" width="140" alt="">
             <h3 style="font-size: 21px;">Giriş</h3>
             <p>
               <small></small>

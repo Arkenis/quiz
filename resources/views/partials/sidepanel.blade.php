@@ -23,34 +23,10 @@
             <span class="icon-thumbnail"><i class="fa fa-th"></i></span>
           </li>
           <li class="m-t-5 ">
-            <a href="{{ url('/') }}">
-              <span class="title">Ü. Grupları</span>
+            <a href="{{ URL::route('users.index') }}">
+              <span class="title">Ulanyjylar</span>
             </a>
-            <span class="icon-thumbnail"><i class="fa fa-th-large"></i></span>
-          </li>
-          <li class="m-t-5 ">
-            <a href="{{ url('/') }}">
-              <span class="title">Haberler</span>
-            </a>
-            <span class="icon-thumbnail"><i class="fa fa-newspaper-o"></i></span>
-          </li>
-          <li class="m-t-5 ">
-            <a href="{{ url('/') }}">
-              <span class="title">Bannerler</span>
-            </a>
-            <span class="icon-thumbnail"><i class="fa fa-photo"></i></span>
-          </li>
-          <li class="m-t-5 ">
-            <a href="{{ url('/') }}">
-              <span class="title">Ürün slideri</span>
-            </a>
-            <span class="icon-thumbnail"><i class="fa fa-exchange"></i></span>
-          </li>
-          <li class="m-t-5 ">
-            <a href="{{ url('/') }}">
-              <span class="title">Katalog</span>
-            </a>
-            <span class="icon-thumbnail"><i class="fa fa-book"></i></span>
+            <span class="icon-thumbnail"><i class="fa fa-users"></i></span>
           </li>
           <li class="m-t-5 ">
             <a href="{{ url('auth/logout') }}">
