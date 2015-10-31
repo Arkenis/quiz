@@ -1,11 +1,8 @@
-<?php
-
-namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 use App\User;
-use Hash;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -88,7 +85,7 @@ class UserController extends Controller
         if ($request->get('password', false))
         {
             $request->merge([
-                'password' => Hash::make($request->get('password')),
+                'password' => bcrypt($request->get('password')),
             ]);
 
             $user->update($request->all());
