@@ -41,7 +41,7 @@ class QuizController extends Controller
     {
         Quiz::create($request->all());
 
-        return \Redirect::route('quizzes.index');
+        return redirect()->route('quizzes.index');
     }
 
     /**
