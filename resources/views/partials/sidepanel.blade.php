@@ -17,7 +17,7 @@
         <!-- BEGIN SIDEBAR MENU ITEMS-->
         <ul class="menu-items">
           <li class="m-t-5 ">
-            <a href="{{ route('quizzes') }}">
+            <a href="{{ route('quizzes.index') }}">
               <span class="title">Synaglar</span>
             </a>
             <span class="icon-thumbnail"><i class="fa fa-th"></i></span>
