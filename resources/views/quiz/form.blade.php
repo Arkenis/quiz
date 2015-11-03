@@ -38,8 +38,7 @@
         <!-- START PANEL -->
         <div class="panel panel-transparent">
           <div class="panel-heading">
-            <div class="panel-title">Täze synagnama döret
-            </div>
+            <div class="panel-title">Täze synagnama döret</div>
           </div>
           <div class="panel-body">
             <div class="row">
@@ -50,7 +49,7 @@
                       <div class="form-group">
                         <div class="row">
                           <div class="col-sm-12">
-                            <div class="content-title">
+                            <div class="content-title m-t-10">
                               <p>Synagnamanyň ady / mowzugy</p>
                             </div>
                             <div>
@@ -62,19 +61,35 @@
                     </div>
                   </div>
 
-
-                  <div class="panel panel-default">
+                  <div class="panel panel-default question">
                     <div class="panel-body">
                       <div class="form-group">
-                        <div class="content-title">
+
+                        <div class="content-title m-t-10">
                           <p>Soraglar</p>
                         </div>
 
-                        <div class="input-title">
-                          <span class="bold">Menýudaky</span> ady
-                        </div>
-                        <div class="m-b-30" >
-                          {!! Form::text("questions[]", null, ['class' => 'form-control']) !!}
+                        <div class="row">
+                          <div class="col-xs-11">
+
+                            <div class="input-title m-b-10">
+                              <span class="bold"><span class="number">1. </span>Soragyň</span> teksti
+                            </div>
+
+                            <div class="m-b-20" >
+                              {!! Form::text("questions[]['text']", null, ['class' => 'form-control']) !!}
+                            </div>
+                          </div>
+                          <div class="col-xs-1">
+                            <div class="input-title m-b-10">
+                              <span>&nbsp;</span>
+                            </div>
+
+                            <div class="m-b-20" >
+                              <a href="#" class="btn-new-question">Täze sorag</a>
+                            </div>
+
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -105,5 +120,17 @@
 @stop
 
 @section('page_scripts')
+
+<script type="text/javascript">
+  
+  $('.btn-new-question').click(function() {
+
+    question = $('.question:last').clone();
+
+    question.insertAfter($('.question:last'));
+
+  });
+
+</script>
 
 @stop

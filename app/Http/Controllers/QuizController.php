@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 
+use App\Quiz;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
@@ -12,7 +13,9 @@ class QuizController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $quizzes = Quiz::all();
+
+        return view('quiz.index', compact('quizzes'));
     }
 
     /**
@@ -33,6 +36,9 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
+
+        dd($request->all());
+
         $request
             ->user()
             ->quizzes()
