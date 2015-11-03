@@ -15,8 +15,8 @@
       <div class="container-fluid container-fixed-lg">
         <!-- START BREADCRUMB -->
         <ul class="breadcrumb">
-          <li><a href="#">SYNAGNAMALAR</a></li>
-          <li><a href="#" class="active">SYNAGNAMALAR</a></li>
+          <li><a href="#">SORAGNAMALAR</a></li>
+          <li><a href="#" class="active">SORAGNAMALAR</a></li>
         </ul>
         <!-- END BREADCRUMB -->
       </div>
@@ -27,7 +27,7 @@
         <!-- START PANEL -->
         <div class="panel panel-transparent">
           <div class="panel-heading">
-            <div class="panel-title">SYNAGNAMALAR
+            <div class="panel-title">SORAGNAMALAR
             </div>
           </div>
           <div class="panel-body">
@@ -35,7 +35,7 @@
               <a href="{{ URL::route('quizzes.create') }}">
                 <button class="btn btn-success btn-cons m-b-10" type="button">
                   <i class="fa fa-file-text-o"></i>
-                  <span class="bold">Synagnama döret</span>
+                  <span class="bold">Soragnama döret</span>
                 </button>
               </a>
 
@@ -77,11 +77,6 @@
                               <i class="fa fa-trash"></i>
                             </button>
                           {!! Form::close() !!}
-                        </div>
-                        <div class="btn-group">
-                          <a class="btn btn-success" href="#">
-                            <i class="fa fa-plus"></i>
-                          </a>
                         </div>
                       </td>
                     </tr>

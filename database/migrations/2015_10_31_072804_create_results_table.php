@@ -23,7 +23,7 @@ class CreateResultsTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('test_id')->references('id')->on('tests');
-            $table->foreign('quiz_id')->references('id')->on('tests');
+            $table->foreign('quiz_id')->references('id')->on('quizzes');
             $table->foreign('question_id')->references('id')->on('questions');
             $table->foreign('answer_id')->references('id')->on('answers');
 

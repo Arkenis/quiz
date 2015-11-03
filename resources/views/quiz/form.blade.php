@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('page_css')
+  <link type="text/css" rel="stylesheet" href="{{ asset('pages/assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+@stop
+
 @section('page_content')
 
 <!-- START PAGE-CONTAINER -->
@@ -15,8 +19,8 @@
       <div class="container-fluid container-fixed-lg">
         <!-- START BREADCRUMB -->
         <ul class="breadcrumb">
-          <li><a href="#">Synagnamalar</a></li>
-          <li><a href="#" class="active">Täze synagnama döret</a></li>
+          <li><a href="#">Soragnamalar</a></li>
+          <li><a href="#" class="active">Täze Soragnama döret</a></li>
         </ul>
         <!-- END BREADCRUMB -->
 
@@ -38,7 +42,7 @@
         <!-- START PANEL -->
         <div class="panel panel-transparent">
           <div class="panel-heading">
-            <div class="panel-title">Täze synagnama döret</div>
+            <div class="panel-title">Täze Soragnama döret</div>
           </div>
           <div class="panel-body">
             <div class="row">
@@ -50,10 +54,10 @@
                         <div class="row">
                           <div class="col-sm-12">
                             <div class="content-title m-t-10">
-                              <p>Synagnamanyň ady / mowzugy</p>
+                              <p>Soragnamanyň ady / mowzugy</p>
                             </div>
                             <div>
-                              {!! Form::text('subject', null, ['class' => 'form-control', 'placeholder' => 'Mysal: Pifagor teoremasy', 'id' => 'subject']) !!}
+                              {!! Form::text('subject', null, ['class' => 'form-control', 'placeholder' => 'Mysal: Türkmenistanyň taryhy', 'id' => 'subject']) !!}
                             </div>
                           </div>
                         </div>
@@ -61,65 +65,7 @@
                     </div>
                   </div>
 
-                  <div class="panel panel-default question">
-                    <div class="panel-body">
-                      <div class="form-group">
-                        <div class="content-title m-t-10">
-                          <p>Soraglar</p>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-xs-12">
-
-                            <div class="input-title m-b-10">
-                              <span class="bold"><span class="number">1. </span>Soragyň</span> teksti
-                            </div>
-
-                            <div class="m-b-20" >
-                              {!! Form::text("questions[0][text]", null, ['class' => 'form-control']) !!}
-                            </div>
-                          </div>
-                        </div>
-                        <p>Jogaplar</p>
-                        
-                        <div class="form-group">
-                          <label>a.</label>
-                          <span class="radio radio-success" style="display: inline;">
-                            <input type="radio" value="0" name="questions[0][correct_answer]" id="1-a">
-                            <label for="1-a">Dogry jogap</label>
-                          </span>
-                          <input type="text" name="questions[0][answers][]" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                          <label>b.</label>
-                          <span class="radio radio-success" style="display: inline;">
-                            <input type="radio" value="1" name="questions[0][correct_answer]" id="1-b">
-                            <label for="1-b">Dogry jogap</label>
-                          </span>
-                          <input type="text" name="questions[0][answers][]" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                          <label>c.</label>
-                          <span class="radio radio-success" style="display: inline;">
-                            <input type="radio" value="2" name="questions[0][correct_answer]" id="1-c">
-                            <label for="1-c">Dogry jogap</label>
-                          </span>
-                          <input type="text" name="questions[0][answers][]" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                          <label>d.</label>
-                          <span class="radio radio-success" style="display: inline;">
-                            <input type="radio" value="3" name="questions[0][correct_answer]" id="1-d">
-                            <label for="1-d">Dogry jogap</label>
-                          </span>
-                          <input type="text" name="questions[0][answers][]" class="form-control" required>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  @include('partials.question', ['i' => 1])
 
                   <div class="row">
                     <div class="col-xs-12">
@@ -147,25 +93,28 @@
 @stop
 
 @section('page_scripts')
-
+<script src="{{ asset('pages/assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <script type="text/javascript">
-  var i = 2;
+  $(function() {
+    var i = 2;
+    $('.wysiwyg').wysihtml5();
 
-  $('.btn-new-question').click(function() {
+    $('.btn-new-question').click(function() {
 
-//    question = $('.question:last').clone();
+  //    question = $('.question:last').clone();
 
-//    question.insertAfter($('.question:last'));
+  //    question.insertAfter($('.question:last'));
 
-    $.get('/question', {
-      question_number: i
-    }).done(function(data) {
-      $(data).insertAfter('.question:last');
-      i++;
-
-      //console.log(i);
+      $.get('/question', {
+        question_number: i
+      }).done(function(data) {
+        $(data).insertAfter('.question:last');
+        i++;
+        $('.wysiwyg').wysihtml5();
+        //console.log(i);
+      });
     });
-  });
+  })
 
 </script>
 

@@ -43,7 +43,11 @@
                 <!-- START PANEL -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <div class="panel-title">{{ $quiz->subject }}</div>
+                        <div class="panel-title">
+                          {{ $quiz->subject }}
+                        </div>
+                        <p class="pull-right">Sorag sany: {{ count($quiz->questions) }}</p>
+                        <hr>
                     </div>
 
                     <div class="panel-body">
@@ -51,30 +55,29 @@
                             <div class="col-sm-10">
                               {!! Form::open(['route' => 'tests.store']) !!}
 
-                              @for($i = 0, $question = $quiz->questions[$i]; $i < sizeof($quiz->questions); $question = $quiz->questions[$i], $i += 1)
-                              <div class="form-group">
-                                <div class="panel panel-transparent">
-                                  <div class="panel-heading">
-                                    <div class="panel-title">{{ 'Sorag ' . ($i + 1) }}</div>
-                                  </div>
-                                  <div class="panel-body">
-                                    <div class="row-fluid">
-                                      <p>{{ $question->text }}</p>
-                                      <div class="radio radio-success">
-                                      @for ($j = 0; $j < sizeof($question->answers) / 4; $j += 1)
-                                      @for ($k = 0; $k < 4 && (4 * $j + $k < sizeof($question->answers)); $k += 1)
-                                        <div class="col-sm-3">
-                                          <input type="radio" value="{{ $question->answers[4 * $j + $k]->id }}" name="{{ $question->id }}" id="{{ $question->answers[4 * $j + $k]->id }}" aria-invalid="false">
-                                          <label for="{{ $question->answers[4 * $j + $k]->id }}">{{ $question->answers[4 * $j + $k]->text }}</label>
+                              @foreach($quiz->questions as $i => $question)
+                                <div class="form-group">
+                                  <div class="panel panel-transparent">
+                                    <div class="panel-heading">
+                                      <div class="panel-title">{{ ($i + 1) . '. ' . $question->text }}</div>
+                                    </div>
+                                    <div class="panel-body">
+                                      <div class="row-fluid">
+                                        <div class="radio radio-success">
+                                        @for ($j = 0; $j < sizeof($question->answers) / 4; $j += 1)
+                                        @for ($k = 0; $k < 4 && (4 * $j + $k < sizeof($question->answers)); $k += 1)
+                                          <div class="col-xs-12">
+                                            <input type="radio" value="{{ $question->answers[4 * $j + $k]->id }}" name="{{ $question->id }}" id="{{ $question->answers[4 * $j + $k]->id }}" aria-invalid="false">
+                                            <label for="{{ $question->answers[4 * $j + $k]->id }}">{{ $choices[$k] . '. ' . $question->answers[4 * $j + $k]->text }}</label>
+                                          </div>
+                                        @endfor
+                                        @endfor
                                         </div>
-                                      @endfor
-                                      @endfor
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                              @endfor
+                              @endforeach
 
                               <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                               <input type="hidden" name="quiz_id" value="{{ $quiz->id }}">

@@ -9,7 +9,9 @@
           </div>
 
           <div class="m-b-20" >
-            {!! Form::text("questions[" . ($i - 1) . "][text]", null, ['class' => 'form-control']) !!}
+            <div class="wysiwyg5-wrapper b-a b-grey">
+              <textarea id="wysiwyg5" name="questions[{{$i - 1}}][text]" class="wysiwyg demo-form-wysiwyg" placeholder="Enter text ..."></textarea>
+            </div>
           </div>
         </div>
       </div>
@@ -17,7 +19,7 @@
       
       <div class="form-group">
         <label>a.</label>
-        <span class="radio radio-success" style="display: inline;">
+        <span class="radio radio-success pull-right m-t-0" style="display: inline;">
           <input type="radio" value="0" name="questions[{{$i-1}}][correct_answer]" id="{{ $i }}-a">
           <label for="{{ $i }}-a">Dogry jogap</label>
         </span>
@@ -26,7 +28,7 @@
 
       <div class="form-group">
         <label>b.</label>
-        <span class="radio radio-success" style="display: inline;">
+        <span class="radio radio-success pull-right m-t-0" style="display: inline;">
           <input type="radio" value="1" name="questions[{{$i-1}}][correct_answer]" id="{{ $i }}-b">
           <label for="{{ $i }}-b">Dogry jogap</label>
         </span>
@@ -35,7 +37,7 @@
 
       <div class="form-group">
         <label>c.</label>
-        <span class="radio radio-success" style="display: inline;">
+        <span class="radio radio-success pull-right m-t-0" style="display: inline;">
           <input type="radio" value="2" name="questions[{{$i-1}}][correct_answer]" id="{{ $i }}-c">
           <label for="{{ $i }}-c">Dogry jogap</label>
         </span>
@@ -44,7 +46,7 @@
 
       <div class="form-group">
         <label>d.</label>
-        <span class="radio radio-success" style="display: inline;">
+        <span class="radio radio-success pull-right m-t-0" style="display: inline;">
           <input type="radio" value="3" name="questions[{{$i-1}}][correct_answer]" id="{{ $i }}-d">
           <label for="{{ $i }}-d">Dogry jogap</label>
         </span>

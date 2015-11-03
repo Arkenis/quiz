@@ -43,7 +43,12 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
+        // die;
+
         $test = Test::create($request->all());
+
+        //dd($test->id);
 
         $score = 0;
 
@@ -51,6 +56,9 @@ class TestController extends Controller
         foreach ($quiz->questions as $question)
         {
             if ($request->has($question->id)) {
+                // dd($request->all(), $question->id);
+                // die;
+
                 $result = Result::create([
                     'quiz_id'     => $request->get('quiz_id'),
                     'user_id'     => $request->get('user_id'),
@@ -58,7 +66,7 @@ class TestController extends Controller
                     'question_id' => $question->id,
                     'answer_id'   => $request->get($question->id)
                 ]);
-
+                
                 $answer = Answer::find($request->get($question->id));
                 if ($answer->correct) {
                     $score += 1;
@@ -69,7 +77,7 @@ class TestController extends Controller
         $test->score = $score;
         $test->save();
 
-        Redirect::route('quizzes.index');
+        return Redirect::route('quizzes.index');
     }
 
     /**

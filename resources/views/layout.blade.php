@@ -23,6 +23,9 @@
     <link href="{!! asset('pages/assets/plugins/jquery-scrollbar/jquery.scrollbar.css') !!}" rel="stylesheet" type="text/css" media="screen" />
     <link href="{!! asset('pages/pages/css/pages-icons.css') !!}" rel="stylesheet" type="text/css">
     <link href="{!! asset('pages/pages/css/pages.css') !!}" class="main-stylesheet" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/quiz.css') }}">
+
+    @yield('page_css')
 
     <!--[if lte IE 9]>
     <link href="pages/css/ie9.css" rel="stylesheet" type="text/css" />
