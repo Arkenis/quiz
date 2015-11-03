@@ -19,8 +19,13 @@ class CreateTestsTable extends Migration
             $table->float('score');
             $table->timestamps();
 
-            $table->foreign('quiz_id')->references('id')->on('quizzes');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('quiz_id')
+                ->references('id')->on('quizzes')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
         });
     }
 

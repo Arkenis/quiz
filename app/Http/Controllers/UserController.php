@@ -1,10 +1,10 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\User;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -44,7 +44,7 @@ class UserController extends Controller
 
         User::create($request->all());
 
-        return \Redirect::route('users.index');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -95,20 +95,21 @@ class UserController extends Controller
             $user->update($request->except(['password']));
         }
 
-        return \Redirect::route('users.index');
+        return redirect()->route('users.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param $user
      * @return Response
+     * @internal param int $id
      */
     public function destroy($user)
     {
 
         $user->delete();
 
-        return \Redirect::route('users.index');
+        return redirect()->route('users.index');
     }
 }

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=8;FF=3;OtherUA=4" />
     <meta name="csrf-token" content="{!! csrf_token() !!}"/>
     <meta charset="utf-8" />
-    <title>Giriş</title>
+    <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="apple-touch-icon" href="pages/ico/60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
@@ -39,7 +39,7 @@
       <div class="container-sm-height full-height">
         <div class="row row-sm-height">
           <div class="col-sm-12 col-sm-height col-middle">
-            <h3 style="font-size: 21px;">Giriş</h3>
+            <h3 style="font-size: 21px;">Login</h3>
             <p>
               <small></small>
             </p>

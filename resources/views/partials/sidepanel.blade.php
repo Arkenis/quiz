@@ -36,7 +36,7 @@
           </li>
           <li class="m-t-5 ">
             <a href="{{ url('auth/logout') }}">
-              <span class="title">Çıkış</span>
+              <span class="title">Çyk</span>
             </a>
             <span class="icon-thumbnail"><i class="fa fa-sign-out"></i></span>
           </li>
