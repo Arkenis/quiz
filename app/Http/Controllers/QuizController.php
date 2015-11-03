@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 
+use App\Quiz;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
@@ -46,12 +47,12 @@ class QuizController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Quiz  $quiz
      * @return Response
      */
-    public function show($id)
+    public function show($quiz)
     {
-
+        return view('quiz.show', compact('quiz'));
     }
 
     /**
