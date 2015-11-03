@@ -84,6 +84,11 @@
                                                     </button>
                                                   {!! Form::close() !!}
                                             </div>
+                                            <div class="btn-group">
+                                                <a class="btn btn-success" href="#">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </div>
                                         </td>
                                     </tr>
                                     </a>
