@@ -11,7 +11,9 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 
+        DB::table('users')->truncate();
         DB::table('users')->insert(
             [
               'name'     => 'admin',
@@ -19,5 +21,7 @@ class UserTableSeeder extends Seeder
               'password' => bcrypt('admin'),
             ]
         );
+
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
