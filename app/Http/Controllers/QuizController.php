@@ -36,6 +36,9 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
+        // die;
+
         $quiz = $request
             ->user()
             ->quizzes()
@@ -43,9 +46,15 @@ class QuizController extends Controller
                 'subject' => $request->get('subject'),
             ]);
 
-        foreach (Input::get('questions') as $q)
+        foreach ($request->get('questions') as $q)
         {
-            
+            $question = \App\Question::create(['text' => $q['text'], 'quiz_id' => $quiz->id]);
+
+            $answers = $q['answers'];
+
+            for ($i=0; $i < 4; $i++) { 
+                \App\Answer::create(['text' => $answers[$i], 'correct' => ($i == $q['correct_answer']), 'question_id' => $question->id]);
+            }
         }
 
         return redirect()->route('quizzes.index');

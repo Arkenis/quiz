@@ -4,7 +4,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    protected $timestamps = false;
+    public $timestamps = false;
+    protected $fillable = ['text', 'quiz_id'];
 
     public function answers()
     {
