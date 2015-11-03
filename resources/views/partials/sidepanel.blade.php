@@ -18,7 +18,7 @@
         <ul class="menu-items">
           <li class="m-t-5 ">
             <a href="{{ route('quizzes.index') }}">
-              <span class="title">Synaglar</span>
+              <span class="title">Synagnamalar</span>
             </a>
             <span class="icon-thumbnail"><i class="fa fa-th"></i></span>
           </li>

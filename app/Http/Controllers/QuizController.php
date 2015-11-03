@@ -37,7 +37,7 @@ class QuizController extends Controller
             ->user()
             ->quizzes()
             ->create([
-                'subject' => $request->get('subject'),  
+                'subject' => $request->get('subject'),
             ]);
 
         return redirect()->route('quizzes.index');
