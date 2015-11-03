@@ -14,8 +14,6 @@ Route::group(['middleware' => 'auth'], function() {
         return view('partials.question', compact('i'));
     });
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/', ['uses' => 'QuizController@index']);
 });
 
