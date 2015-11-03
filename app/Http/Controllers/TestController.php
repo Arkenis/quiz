@@ -60,6 +60,7 @@ class TestController extends Controller
                 ]);
 
                 $answer = Answer::find($request->get($question->id));
+
                 if ($answer->correct) {
                     $score += 1;
                 }

@@ -24,7 +24,7 @@ class QuizController extends Controller
      */
     public function create()
     {
-        return view('quiz.form');
+        return view('quiz.create');
     }
 
     /**
@@ -77,34 +77,59 @@ class QuizController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Quiz $quiz
      * @return Response
+     * @internal param int $id
      */
-    public function edit($id)
+    public function edit(Quiz $quiz)
     {
-        //
+        return view('quiz.edit', compact('quiz'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  Request $request
+     * @param Quiz $quiz
      * @return Response
+     * @internal param int $id
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Quiz $quiz)
     {
-        //
+        $quiz->update([
+            'subject' => $request->get('subject'),
+        ]);
+
+        foreach ($quiz->questions as $question)
+        {
+            $q = $request->get('questions')[$question->id];
+
+            $question->text = $q['text'];
+            $question->save();
+
+            foreach ($question->answers as $answer)
+            {
+                $answer->text = $q['answers'][$answer->id];
+                $answer->correct = ($q['correct_answer'] == $answer->id);
+                $answer->save();
+            }
+        }
+
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Quiz $quiz
      * @return Response
+     * @throws \Exception
+     * @internal param int $id
      */
-    public function destroy($id)
+    public function destroy(Quiz $quiz)
     {
-        //
+        $quiz->delete();
+
+        return redirect()->back();
     }
 }
