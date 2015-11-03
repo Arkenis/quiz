@@ -13,4 +13,9 @@ class Quiz extends Model
     {
         return $this->hasMany('App\Question');
     }
+
+    public function getUser()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
 }

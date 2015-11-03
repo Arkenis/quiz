@@ -67,6 +67,9 @@
                                             <p>{{ $quiz->subject }}</p>
                                         </td>
                                         <td class="v-align-middle">
+                                            <p>{{ $quiz->getUser->name }}</p>
+                                        </td>
+                                        <td class="v-align-middle">
                                             <div class="btn-group">
                                                 <a href="{{ URL::route('quizzes.edit', ['id' => $quiz->id]) }}">
                                                     <button type="button" class="btn btn-success">
@@ -80,6 +83,11 @@
                                                       <i class="fa fa-trash"></i>
                                                     </button>
                                                   {!! Form::close() !!}
+                                            </div>
+                                            <div class="btn-group">
+                                                <a class="btn btn-success" href="#">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
                                             </div>
                                         </td>
                                     </tr>

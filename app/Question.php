@@ -20,9 +20,4 @@ class Question extends Model
 
         return null;
     }
-
-    public function questions()
-    {
-        $this->hasMany('App\Questions');
-    }
 }
