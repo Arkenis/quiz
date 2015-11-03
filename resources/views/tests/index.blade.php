@@ -53,10 +53,10 @@
                                   <p>{{ $test->getName() }}</p>
                               </td>
                               <td class="v-align-middle">
-                                  <p>{{ $product->quiz_id }}</p>
+                                  <p>{{ $test->quiz_id }}</p>
                               </td>
                               <td class="v-align-middle">
-                                  <p>{{ $product->quiz_id  }}</p>
+                                  <p>{{ $test->score  }}</p>
                               </td>
                               <td class="v-align-middle" align="right">
                                   <div class="btn-group">

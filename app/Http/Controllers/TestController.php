@@ -43,15 +43,7 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        $test = Test::where('quiz_id', $request->get('quiz_id'))
-            ->where('user_id', $request->get('user_id'))
-            ->first();
-
-        if ($test == null) {
-            $test = Test::create($request->all());
-        }
-
-        $test->results()->delete();
+        $test = Test::create($request->all());
 
         $score = 0;
 

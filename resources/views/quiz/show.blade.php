@@ -41,7 +41,7 @@
               @endif
 
                 <!-- START PANEL -->
-                <div class="panel panel-transparent">
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="panel-title">{{ $quiz->subject }}</div>
                     </div>
@@ -51,7 +51,7 @@
                             <div class="col-sm-10">
                               {!! Form::open(['route' => 'tests.store']) !!}
 
-                              @for($i = 0, $question = $quiz->questions[$i]; $i < sizeof($quiz->questions); $question = $quiz->questions[$i]. $i += 1)
+                              @for($i = 0, $question = $quiz->questions[$i]; $i < sizeof($quiz->questions); $question = $quiz->questions[$i], $i += 1)
                               <div class="form-group">
                                 <div class="panel panel-transparent">
                                   <div class="panel-heading">

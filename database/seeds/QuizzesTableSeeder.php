@@ -35,6 +35,18 @@ class QuizzesTableSeeder extends Seeder
         DB::table('answers')->insert([ 'text' => '4', 'correct' => 1, 'question_id' => '1' ]);
         DB::table('answers')->insert([ 'text' => '5', 'correct' => 0, 'question_id' => '1' ]);
 
+        DB::table('questions')->insert(
+            [
+                'text'    => 'Which of the following numbers is a perfect square?',
+                'quiz_id' => '1',
+            ]
+        );
+
+        DB::table('answers')->insert([ 'text' => '2', 'correct' => 0, 'question_id' => '2' ]);
+        DB::table('answers')->insert([ 'text' => '3', 'correct' => 0, 'question_id' => '2' ]);
+        DB::table('answers')->insert([ 'text' => '4', 'correct' => 1, 'question_id' => '2' ]);
+        DB::table('answers')->insert([ 'text' => '5', 'correct' => 0, 'question_id' => '2' ]);
+
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
