@@ -23,6 +23,12 @@
             <span class="icon-thumbnail"><i class="fa fa-th"></i></span>
           </li>
           <li class="m-t-5 ">
+            <a href="{{ route('tests.index') }}">
+              <span class="title">Netijeler</span>
+            </a>
+            <span class="icon-thumbnail"><i class="fa fa-navicon"></i></span>
+          </li>
+          <li class="m-t-5 ">
             <a href="{{ URL::route('users.index') }}">
               <span class="title">Ulanyjylar</span>
             </a>
