@@ -16,7 +16,7 @@
         <div class=" pull-left sm-table">
           <div class="header-inner">
             <div class="brand inline">
-              <img src="{!! asset('pages/assets/img/logo.svg') !!}" alt="logo" data-src="{!! asset('pages/assets/img/logo.svg') !!}" data-src-retina="{!! asset('pages/assets/img/logo.svg') !!}" width="120" height="40">
+              <img src="{!! asset('img/logo_dark.svg') !!}" alt="logo" data-src="{!! asset('img/logo_dark.svg') !!}" data-src-retina="{!! asset('img/logo_dark.svg') !!}" height="26" height="40">
             </div>
           </div>
         </div>
