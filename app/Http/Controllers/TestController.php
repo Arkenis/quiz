@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Answer;
+use App\Quiz;
+use App\Result;
 use App\Test;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 
 class TestController extends Controller
 {
@@ -39,7 +43,33 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $test = Test::create($request->all());
+
+        $score = 0;
+
+        $quiz = Quiz::find($request->get('quiz_id'));
+        foreach ($quiz->questions as $question)
+        {
+            if ($request->has($question->id)) {
+                $result = Result::create([
+                    'quiz_id'     => $request->get('quiz_id'),
+                    'user_id'     => $request->get('user_id'),
+                    'test_id'     => $test->id,
+                    'question_id' => $question->id,
+                    'answer_id'   => $request->get($question->id)
+                ]);
+
+                $answer = Answer::find($request->get($question->id));
+                if ($answer->correct) {
+                    $score += 1;
+                }
+            }
+        }
+
+        $test->score = $score;
+        $test->save();
+
+        Redirect::route('quizzes.index');
     }
 
     /**
