@@ -64,9 +64,9 @@
                               </td>
                               <td class="v-align-middle" align="right">
                                   <div class="btn-group">
-                                      <a href="#">
+                                      <a href="{{ URL::route('tests.show', $test->id) }}">
                                           <button type="button" class="btn btn-success">
-                                              <i class="fa fa-pencil"></i>
+                                              <i class="fa fa-eye"></i>
                                           </button>
                                       </a>
                                       <a href="#">
@@ -93,8 +93,6 @@
         <!-- END PAGE CONTENT -->
 
         @include('partials.footer')
-
-
     </div>
     <!-- END PAGE CONTENT WRAPPER -->
 

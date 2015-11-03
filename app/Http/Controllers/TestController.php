@@ -89,7 +89,9 @@ class TestController extends Controller
      */
     public function show($id)
     {
-        //
+        $test = Test::findOrFail($id);
+
+        return view('tests.show', compact('test'));
     }
 
     /**

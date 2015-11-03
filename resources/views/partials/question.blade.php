@@ -9,9 +9,7 @@
           </div>
 
           <div class="m-b-20" >
-            <div class="wysiwyg5-wrapper b-a b-grey">
-              <textarea id="wysiwyg5" name="questions[{{$i - 1}}][text]" class="wysiwyg demo-form-wysiwyg" placeholder="Enter text ..."></textarea>
-            </div>
+            <textarea id="wysiwyg5" style="width: 100%;" name="questions[{{$i - 1}}][text]" class="wysiwyg demo-form-wysiwyg" placeholder="Enter text ..."></textarea>
           </div>
         </div>
       </div>

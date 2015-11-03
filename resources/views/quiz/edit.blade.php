@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('page_css')
+  <link type="text/css" rel="stylesheet" href="{{ asset('pages/assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+@stop
+
 @section('page_content')
 
 <!-- START PAGE-CONTAINER -->
@@ -76,7 +80,7 @@
                             </div>
 
                             <div class="m-b-20" >
-                              {!! Form::text("questions[$question->id][text]", $question->text, ['class' => 'form-control']) !!}
+                              {!! Form::textarea("questions[$question->id][text]", $question->text, ['class' => 'form-control wysiwyg demo-form-wysiwyg']) !!}
                             </div>
                           </div>
                         </div>
@@ -124,9 +128,11 @@
 @stop
 
 @section('page_scripts')
-
+<script src="{{ asset('pages/assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <script type="text/javascript">
+$(function() {
   var i = 2;
+  $('.wysiwyg').wysihtml5();
 
   $('.btn-new-question').click(function() {
 
@@ -142,7 +148,8 @@
 
       //console.log(i);
     });
-  });
+  });  
+});
 
 </script>
 
