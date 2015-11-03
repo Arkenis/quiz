@@ -41,8 +41,9 @@
                         <thead>
                         <tr role="row">
                           <th style="width: 20%;" aria-controls="basicTable">Okuwçy</th>
-                          <th style="width: 30%;" aria-controls="basicTable">Synag nomeri</th>
-                          <th style="width: 30%;" aria-controls="basicTable">Netijesi</th>
+                          <th style="width: 20%;" aria-controls="basicTable">Synag mowzugy</th>
+                          <th style="width: 20%;" aria-controls="basicTable">DOGRY/ÝALŇYŞ</th>
+                          <th style="width: 20%;" aria-controls="basicTable">Senesi</th>
                           <th style="width: 20%;" aria-controls="basicTable"></th>
                         </tr>
                         </thead>
@@ -50,13 +51,16 @@
                           @foreach ($tests as $test)
                           <tr role="row" class="odd">
                               <td class="v-align-middle">
-                                  <p>{{ $test->getName() }}</p>
+                                <p>{{ $test->getName() }}</p>
                               </td>
                               <td class="v-align-middle">
-                                  <p>{{ $test->quiz_id }}</p>
+                                <p>{{ $test->quiz->subject }}</p>
                               </td>
                               <td class="v-align-middle">
-                                  <p>{{ $test->score  }}</p>
+                                <p>{{ $test->score . '/' . (count($test->results) - $test->score)  }}</p>
+                              </td>
+                              <td class="v-align-middle">
+                                <p>{{ $test->created_at->format('d/m/Y') }}</p>
                               </td>
                               <td class="v-align-middle" align="right">
                                   <div class="btn-group">

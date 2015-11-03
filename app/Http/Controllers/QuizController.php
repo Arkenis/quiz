@@ -69,9 +69,20 @@ class QuizController extends Controller
      * @param  Quiz  $quiz
      * @return Response
      */
-    public function show($quiz)
+    public function show(Quiz $quiz)
     {
-        return view('quiz.show', compact('quiz'));
+        // echo '<pre>';
+        // print_r($quiz);
+        // die;
+
+        $choices = [
+            'A',
+            'B',
+            'C',
+            'D',
+        ];
+
+        return view('quiz.show', compact('quiz', 'choices'));
     }
 
     /**
