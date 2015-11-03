@@ -1,6 +1,5 @@
 <?php namespace App\Http\Controllers;
 
-
 use App\Quiz;
 use Illuminate\Http\Request;
 
@@ -48,12 +47,19 @@ class QuizController extends Controller
 
         foreach ($request->get('questions') as $q)
         {
-            $question = \App\Question::create(['text' => $q['text'], 'quiz_id' => $quiz->id]);
+            $question = $quiz->questions()->create([
+                'text' => $q['text'],
+            ]);
 
             $answers = $q['answers'];
 
-            for ($i=0; $i < 4; $i++) { 
-                \App\Answer::create(['text' => $answers[$i], 'correct' => ($i == $q['correct_answer']), 'question_id' => $question->id]);
+            foreach (range(0, 3) as $i)
+            {
+                $question->answers()->create([
+                    'text'        => $answers[$i],
+                    'correct'     => ($i == $q['correct_answer']),
+                    'question_id' => $question->id,
+                ]);
             }
         }
 
