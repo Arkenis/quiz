@@ -13,7 +13,9 @@ class QuizController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $quizzes = Quiz::all();
+
+        return view('quiz.index', compact('quizzes'));
     }
 
     /**
@@ -34,12 +36,17 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-        $request
+        $quiz = $request
             ->user()
             ->quizzes()
             ->create([
-                'subject' => $request->get('subject'),  
+                'subject' => $request->get('subject'),
             ]);
+
+        foreach (Input::get('questions') as $q)
+        {
+            
+        }
 
         return redirect()->route('quizzes.index');
     }
