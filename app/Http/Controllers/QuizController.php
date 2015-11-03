@@ -70,10 +70,6 @@ class QuizController extends Controller
      */
     public function show(Quiz $quiz)
     {
-        // echo '<pre>';
-        // print_r($quiz);
-        // die;
-
         $choices = [
             'A',
             'B',

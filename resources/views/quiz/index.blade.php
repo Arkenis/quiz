@@ -44,10 +44,18 @@
                   <table class="table table-hover dataTable no-footer" id="basicTable" role="grid">
                     <thead>
                     <tr role="row">
-                      <th style="width: 20%;" aria-controls="basicTable">#</th>
-                      <th style="width: 30%;" aria-controls="basicTable">Temasy</th>
-                      <th style="width: 30%;" aria-controls="basicTable">Döreden</th>
-                      <th style="width: 20%;" aria-controls="basicTable"></th>
+                      <th style="width: 20%;">#</th>
+                      <th style="width: 20%;">Temasy</th>
+                      <th style="width: 20%;">Döreden</th>
+                      <th style="width: 30%;">
+                        @if (auth()->user()->isAdmin())
+                          Üýtget/Poz/Gör/Gatnaşanlar
+                        @elseif (auth()->user()->isExaminer())
+                          Gör/Gatnaşanlar
+                        @else
+                          Gatnaş
+                        @endif
+                      </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -65,18 +73,12 @@
                       </td>
                       <td class="v-align-middle">
                         <div class="btn-group">
-                          <a href="{{ URL::route('quizzes.edit', ['id' => $quiz->id]) }}">
-                            <button type="button" class="btn btn-success">
-                              <i class="fa fa-pencil"></i>
-                            </button>
-                          </a>
-                        </div>
-                        <div class="btn-group">
-                          {!! Form::model($quiz, ['method' => 'DELETE', 'route' => ['quizzes.destroy', $quiz->id]]) !!}
-                            <button type="submit" class="btn btn-success">
-                              <i class="fa fa-trash"></i>
-                            </button>
-                          {!! Form::close() !!}
+                          @if (auth()->user()->isAdmin())
+                          <a title="Üýtget" href="{{ URL::route('quizzes.edit', $quiz->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                          <a title="Poz" href="{{ URL::route('quizzes.destroy', $quiz->id) }}" class="btn btn-success"><i class="fa fa-trash"></i></a>
+                          @endif
+                          <a title="Gatnaş/Gör" href="{{ URL::route('quizzes.show', $quiz->id) }}" class="btn btn-success"><i class="fa fa-file-o"></i></a>
+                          <a title="Gatnaşanlar" href="#" class="btn btn-success"><i class="fa fa-users"></i></a>
                         </div>
                       </td>
                     </tr>
