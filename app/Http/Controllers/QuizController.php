@@ -12,8 +12,7 @@ class QuizController extends Controller
      */
     public function index()
     {
-        $quizzes = Quiz::all();
-
+        $quizzes = Quiz::latest()->get();
         return view('quiz.index', compact('quizzes'));
     }
 
@@ -71,10 +70,6 @@ class QuizController extends Controller
      */
     public function show(Quiz $quiz)
     {
-        // echo '<pre>';
-        // print_r($quiz);
-        // die;
-
         $choices = [
             'A',
             'B',

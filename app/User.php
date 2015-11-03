@@ -44,4 +44,14 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasMany('App\Quiz');
     }
+
+    public function isAdmin()
+    {
+        return $this->type == 'admin';
+    }
+
+    public function isExaminer()
+    {
+        return $this->type == 'examiner';
+    }
 }
