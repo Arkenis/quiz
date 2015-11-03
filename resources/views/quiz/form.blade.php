@@ -64,32 +64,58 @@
                   <div class="panel panel-default question">
                     <div class="panel-body">
                       <div class="form-group">
-
                         <div class="content-title m-t-10">
                           <p>Soraglar</p>
                         </div>
 
                         <div class="row">
-                          <div class="col-xs-11">
+                          <div class="col-xs-12">
 
                             <div class="input-title m-b-10">
                               <span class="bold"><span class="number">1. </span>Soragyň</span> teksti
                             </div>
 
                             <div class="m-b-20" >
-                              {!! Form::text("questions[]['text']", null, ['class' => 'form-control']) !!}
+                              {!! Form::text("questions[0]['text']", null, ['class' => 'form-control']) !!}
                             </div>
                           </div>
-                          <div class="col-xs-1">
-                            <div class="input-title m-b-10">
-                              <span>&nbsp;</span>
-                            </div>
+                        </div>
+                        <p>Jogaplar</p>
+                        
+                        <div class="form-group">
+                          <label>a.</label>
+                          <span class="radio radio-success" style="display: inline;">
+                            <input type="radio" value="0" name="questions[0]['correct_answer']" id="1-a">
+                            <label for="1-a">Dogry jogap</label>
+                          </span>
+                          <input type="text" name="questions[0]['answers'][]" class="form-control" required>
+                        </div>
 
-                            <div class="m-b-20" >
-                              <a href="#" class="btn-new-question">Täze sorag</a>
-                            </div>
+                        <div class="form-group">
+                          <label>b.</label>
+                          <span class="radio radio-success" style="display: inline;">
+                            <input type="radio" value="1" name="questions[0]['correct_answer']" id="1-b">
+                            <label for="1-b">Dogry jogap</label>
+                          </span>
+                          <input type="text" name="questions[0]['answers'][]" class="form-control" required>
+                        </div>
 
-                          </div>
+                        <div class="form-group">
+                          <label>c.</label>
+                          <span class="radio radio-success" style="display: inline;">
+                            <input type="radio" value="2" name="questions[0]['correct_answer']" id="1-c">
+                            <label for="1-c">Dogry jogap</label>
+                          </span>
+                          <input type="text" name="questions[0]['answers'][]" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                          <label>d.</label>
+                          <span class="radio radio-success" style="display: inline;">
+                            <input type="radio" value="3" name="questions[0]['correct_answer']" id="1-d">
+                            <label for="1-d">Dogry jogap</label>
+                          </span>
+                          <input type="text" name="questions[0]['answers'][]" class="form-control" required>
                         </div>
                       </div>
                     </div>
@@ -98,6 +124,7 @@
                   <div class="row">
                     <div class="col-xs-12">
                       <button class="pull-right btn btn-success" type="submit">Döret</button>
+                      <button type="button" href="#" class="btn btn-new-question pull-right" style="margin-right: 15px;">Täze sorag</button>
                     </div>
                   </div>
 
@@ -122,13 +149,22 @@
 @section('page_scripts')
 
 <script type="text/javascript">
-  
+  var i = 2;
+
   $('.btn-new-question').click(function() {
 
-    question = $('.question:last').clone();
+//    question = $('.question:last').clone();
 
-    question.insertAfter($('.question:last'));
+//    question.insertAfter($('.question:last'));
 
+    $.get('/question', {
+      question_number: i
+    }).done(function(data) {
+      $(data).insertAfter('.question:last');
+      i++;
+
+      //console.log(i);
+    });
   });
 
 </script>
