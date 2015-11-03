@@ -1,30 +1,24 @@
-<?php
+<?php namespace App\Http\Controllers;
 
-namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Quiz;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 class QuizController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
-        $quizzes = Quiz::all();
-
-        return view('quiz.index', compact('quizzes'));
+        return view('home');
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -34,21 +28,26 @@ class QuizController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @return Response
      */
     public function store(Request $request)
     {
-        Quiz::create($request->all());
+        $request
+            ->user()
+            ->quizzes()
+            ->create([
+                'subject' => $request->get('subject'),  
+            ]);
 
-        return \Redirect::route('quizzes.index');
+        return redirect()->route('quizzes.index');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -59,40 +58,33 @@ class QuizController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function edit(Quiz $quiz)
+    public function edit($id)
     {
-
-        return view('quiz.form', compact('quiz'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function update(Request $request, Quiz $quiz)
+    public function update(Request $request, $id)
     {
-
-        $quiz->update($request->all());
-
-        return \Redirect::route('quizzes.index');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function destroy($quiz)
+    public function destroy($id)
     {
-
-        $quiz->delete();
-
-        return \Redirect::route('quizzes.index');
+        //
     }
 }
