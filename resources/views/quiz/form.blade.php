@@ -76,7 +76,7 @@
                             </div>
 
                             <div class="m-b-20" >
-                              {!! Form::text("questions[0]['text']", null, ['class' => 'form-control']) !!}
+                              {!! Form::text("questions[0][text]", null, ['class' => 'form-control']) !!}
                             </div>
                           </div>
                         </div>
@@ -85,37 +85,37 @@
                         <div class="form-group">
                           <label>a.</label>
                           <span class="radio radio-success" style="display: inline;">
-                            <input type="radio" value="0" name="questions[0]['correct_answer']" id="1-a">
+                            <input type="radio" value="0" name="questions[0][correct_answer]" id="1-a">
                             <label for="1-a">Dogry jogap</label>
                           </span>
-                          <input type="text" name="questions[0]['answers'][]" class="form-control" required>
+                          <input type="text" name="questions[0][answers][]" class="form-control" required>
                         </div>
 
                         <div class="form-group">
                           <label>b.</label>
                           <span class="radio radio-success" style="display: inline;">
-                            <input type="radio" value="1" name="questions[0]['correct_answer']" id="1-b">
+                            <input type="radio" value="1" name="questions[0][correct_answer]" id="1-b">
                             <label for="1-b">Dogry jogap</label>
                           </span>
-                          <input type="text" name="questions[0]['answers'][]" class="form-control" required>
+                          <input type="text" name="questions[0][answers][]" class="form-control" required>
                         </div>
 
                         <div class="form-group">
                           <label>c.</label>
                           <span class="radio radio-success" style="display: inline;">
-                            <input type="radio" value="2" name="questions[0]['correct_answer']" id="1-c">
+                            <input type="radio" value="2" name="questions[0][correct_answer]" id="1-c">
                             <label for="1-c">Dogry jogap</label>
                           </span>
-                          <input type="text" name="questions[0]['answers'][]" class="form-control" required>
+                          <input type="text" name="questions[0][answers][]" class="form-control" required>
                         </div>
 
                         <div class="form-group">
                           <label>d.</label>
                           <span class="radio radio-success" style="display: inline;">
-                            <input type="radio" value="3" name="questions[0]['correct_answer']" id="1-d">
+                            <input type="radio" value="3" name="questions[0][correct_answer]" id="1-d">
                             <label for="1-d">Dogry jogap</label>
                           </span>
-                          <input type="text" name="questions[0]['answers'][]" class="form-control" required>
+                          <input type="text" name="questions[0][answers][]" class="form-control" required>
                         </div>
                       </div>
                     </div>

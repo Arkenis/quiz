@@ -36,15 +36,17 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-
-        dd($request->all());
-
-        $request
+        $quiz = $request
             ->user()
             ->quizzes()
             ->create([
                 'subject' => $request->get('subject'),
             ]);
+
+        foreach (Input::get('questions') as $q)
+        {
+            
+        }
 
         return redirect()->route('quizzes.index');
     }

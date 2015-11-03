@@ -30,7 +30,7 @@
           <input type="radio" value="1" name="questions[{{$i-1}}]['correct_answer']" id="{{ $i }}-b">
           <label for="{{ $i }}-b">Dogry jogap</label>
         </span>
-        <input type="text" name="questions[{{$i-1}}]['answers'][]" class="form-control" required>
+        <input type="text" name="questions[{{$i-1}}][answers][]" class="form-control" required>
       </div>
 
       <div class="form-group">
@@ -39,7 +39,7 @@
           <input type="radio" value="2" name="questions[{{$i-1}}]['correct_answer']" id="{{ $i }}-c">
           <label for="{{ $i }}-c">Dogry jogap</label>
         </span>
-        <input type="text" name="questions[{{$i-1}}]['answers'][]" class="form-control" required>
+        <input type="text" name="questions[{{$i-1}}][answers][]" class="form-control" required>
       </div>
 
       <div class="form-group">
@@ -48,7 +48,7 @@
           <input type="radio" value="3" name="questions[{{$i-1}}]['correct_answer']" id="{{ $i }}-d">
           <label for="{{ $i }}-d">Dogry jogap</label>
         </span>
-        <input type="text" name="questions[{{$i-1}}]['answers'][]" class="form-control" required>
+        <input type="text" name="questions[{{$i-1}}][answers][]" class="form-control" required>
       </div>
     </div>
   </div>
