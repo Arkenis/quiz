@@ -1,7 +1,9 @@
 <?php namespace App\Http\Controllers;
 
 use App\Quiz;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QuizController extends Controller
 {
@@ -13,7 +15,8 @@ class QuizController extends Controller
     public function index()
     {
         $quizzes = Quiz::latest()->get();
-        return view('quiz.index', compact('quizzes'));
+        $user = User::find(Auth::id());
+        return view('quiz.index', compact('quizzes', 'user'));
     }
 
     /**

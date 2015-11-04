@@ -54,4 +54,13 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->type == 'examiner';
     }
+
+    public function getTranslatedTypeAttribute()
+    {
+        if ($this->type == 'examiner')
+            return 'mugallym';
+        else if ($this->type == 'examinee')
+            return 'okuwçy';
+        return 'admin';
+    }
 }

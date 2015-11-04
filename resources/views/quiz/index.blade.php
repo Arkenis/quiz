@@ -32,12 +32,14 @@
           </div>
           <div class="panel-body">
             <div class="panel-body">
+              @if ($user->type != 'examinee')
               <a href="{{ URL::route('quizzes.create') }}">
                 <button class="btn btn-success btn-cons m-b-10" type="button">
                   <i class="fa fa-file-text-o"></i>
                   <span class="bold">Soragnama döret</span>
                 </button>
               </a>
+              @endif
 
               <div class="table-responsive">
                 <div id="basicTable_wrapper" class="dataTables_wrapper form-inline no-footer">
