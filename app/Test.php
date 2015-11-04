@@ -14,11 +14,17 @@ class Test extends Model
     public function getName()
     {
         $user = User::find($this->user_id);
+
         return $user->name;
     }
 
     public function quiz()
     {
         return $this->belongsTo('App\Quiz');
+    }
+
+    public function examinee()
+    {
+        return $this->belongsTo('App\User');
     }
 }

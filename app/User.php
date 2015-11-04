@@ -45,6 +45,11 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany('App\Quiz');
     }
 
+    public function tests()
+    {
+        return $this->hasMany('App\Test');
+    }
+
     public function isAdmin()
     {
         return $this->type == 'admin';
@@ -62,5 +67,10 @@ class User extends Model implements AuthenticatableContract,
         else if ($this->type == 'examinee')
             return 'okuwçy';
         return 'admin';
+    }
+
+    public function allowedQuizzes()
+    {
+        return $this->belongsToMany('App\Quiz');
     }
 }

@@ -33,7 +33,7 @@
           <div class="panel-body">
             <div class="panel-body">
               @if ($user->type != 'examinee')
-              <a href="{{ URL::route('quizzes.create') }}">
+              <a href="{{ route('quizzes.create') }}">
                 <button class="btn btn-success btn-cons m-b-10" type="button">
                   <i class="fa fa-file-text-o"></i>
                   <span class="bold">Soragnama döret</span>
@@ -49,7 +49,7 @@
                       <th style="width: 20%;">#</th>
                       <th style="width: 20%;">Temasy</th>
                       <th style="width: 20%;">Döreden</th>
-                      <th style="width: 30%;">
+                      <th style="width: 30%;" align="right">
                         @if (auth()->user()->isAdmin())
                           Üýtget/Poz/Gör/Gatnaşanlar
                         @elseif (auth()->user()->isExaminer())
@@ -73,18 +73,17 @@
                       <td class="v-align-middle">
                         <p>{{ $quiz->user->name }}</p>
                       </td>
-                      <td class="v-align-middle">
+                      <td align="right">
                         <div class="btn-group">
                           @if (auth()->user()->isAdmin())
-                          <a title="Üýtget" href="{{ URL::route('quizzes.edit', $quiz->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-                          <a title="Poz" href="{{ URL::route('quizzes.destroy', $quiz->id) }}" class="btn btn-success"><i class="fa fa-trash"></i></a>
+                          <a title="Üýtget" href="{{ route('quizzes.edit', $quiz->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                          <a title="Poz" href="{{ route('quizzes.destroy', $quiz->id) }}" class="btn btn-success"><i class="fa fa-trash"></i></a>
                           @endif
-                          <a title="Gatnaş/Gör" href="{{ URL::route('quizzes.show', $quiz->id) }}" class="btn btn-success"><i class="fa fa-file-o"></i></a>
-                          <a title="Gatnaşanlar" href="#" class="btn btn-success"><i class="fa fa-users"></i></a>
+                          <a title="Gatnaş/Gör" href="{{ route('quizzes.show', $quiz->id) }}" class="btn btn-success"><i class="fa fa-file-o"></i></a>
+                          <a title="Gatnaşanlar" href="{{ route('quizzes.matching', $quiz->id) }}" class="btn btn-success"><i class="fa fa-users"></i></a>
                         </div>
                       </td>
                     </tr>
-                    </a>
                     @endforeach
                     </tbody>
                   </table>
@@ -98,8 +97,9 @@
       <!-- END CONTAINER FLUID -->
     </div>
     <!-- END PAGE CONTENT -->
+
     @include('partials.footer')
-    <!-- END COPYRIGHT -->
+
   </div>
   <!-- END PAGE CONTENT WRAPPER -->
 </div>

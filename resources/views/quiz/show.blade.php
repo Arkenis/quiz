@@ -55,7 +55,7 @@
                             <div class="col-sm-10">
                               {!! Form::open(['route' => 'tests.store']) !!}
 
-                              @foreach($quiz->questions as $i => $question)
+                              @foreach($quiz->questions() as $i => $question)
                                 <div class="form-group">
                                   <div class="panel panel-transparent">
                                     <div class="panel-heading">

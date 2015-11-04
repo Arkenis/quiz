@@ -90,8 +90,9 @@ class TestController extends Controller
     public function show($id)
     {
         $test = Test::findOrFail($id);
+        $quiz = $test->quiz;
 
-        return view('tests.show', compact('test'));
+        return view('tests.show', compact('test', 'quiz'));
     }
 
     /**

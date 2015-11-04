@@ -8,6 +8,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('tests', 'TestController');
     Route::resource('quizzes', 'QuizController');
 
+    Route::get('/quizzes/{quizzes}/matching', [
+        'as'   => 'quizzes.matching',
+        'uses' => 'QuizController@match'
+    ]);
+
     Route::get('/question', function() {
         $i = Input::get('question_number');
 
@@ -16,4 +21,3 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/', ['uses' => 'QuizController@index']);
 });
-

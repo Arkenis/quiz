@@ -73,12 +73,7 @@ class QuizController extends Controller
      */
     public function show(Quiz $quiz)
     {
-        $choices = [
-            'A',
-            'B',
-            'C',
-            'D',
-        ];
+        $choices = ['A', 'B', 'C', 'D'];
 
         return view('quiz.show', compact('quiz', 'choices'));
     }
@@ -118,7 +113,7 @@ class QuizController extends Controller
 
             foreach ($question->answers as $answer)
             {
-                $answer->text = $q['answers'][$answer->id];
+                $answer->text    = $q['answers'][$answer->id];
                 $answer->correct = ($q['correct_answer'] == $answer->id);
                 $answer->save();
             }
