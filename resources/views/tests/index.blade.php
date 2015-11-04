@@ -60,7 +60,7 @@
                                 <p>{{ $test->score . '/' . (count($test->results) - $test->score)  }}</p>
                               </td>
                               <td class="v-align-middle">
-                                <p>{{ $test->created_at->format('d/m/Y') }}</p>
+                                <p>{{ $test->created_at->format('H:i:s | d-m-Y') }}</p>
                               </td>
                               <td class="v-align-middle" align="right">
                                   <div class="btn-group">

@@ -56,8 +56,6 @@ class TestController extends Controller
         foreach ($quiz->questions as $question)
         {
             if ($request->has($question->id)) {
-                // dd($request->all(), $question->id);
-                // die;
 
                 $result = Result::create([
                     'quiz_id'     => $request->get('quiz_id'),

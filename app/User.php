@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
@@ -45,6 +46,11 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany('App\Quiz');
     }
 
+    public function availableQuizzes()
+    {
+        return $this->belongsToMany('App\Quiz', 'user_quiz');
+    }
+
     public function isAdmin()
     {
         return $this->type == 'admin';
@@ -53,6 +59,25 @@ class User extends Model implements AuthenticatableContract,
     public function isExaminer()
     {
         return $this->type == 'examiner';
+    }
+
+    public function isExaminee()
+    {
+        return $this->type == 'examinee';
+    }
+
+    public function limitReached($quiz_id)
+    {
+        $today = Test::where('quiz_id', $quiz_id)
+            ->where('user_id', Auth::id())
+            ->where('created_at', '>=', new \DateTime('today'))
+            ->get();
+
+        if ($this->isExaminee() && count($today) >= 3) {
+            return true;
+        }
+
+        return false;
     }
 
     public function getTranslatedTypeAttribute()

@@ -26,6 +26,12 @@
       <div class="container-fluid container-fixed-lg">
         <!-- START PANEL -->
         <div class="panel panel-transparent">
+          @if (Session::has('limit_reached'))
+          <div class="alert alert-danger" role="alert">
+            <button class="close" data-dismiss="alert"></button>
+            wow wow wow cool down: 3 times only
+          </div>
+          @endif
           <div class="panel-heading">
             <div class="panel-title">SORAGNAMALAR
             </div>
@@ -79,7 +85,11 @@
                           <a title="Üýtget" href="{{ URL::route('quizzes.edit', $quiz->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
                           <a title="Poz" href="{{ URL::route('quizzes.destroy', $quiz->id) }}" class="btn btn-success"><i class="fa fa-trash"></i></a>
                           @endif
+                          @if (auth()->user()->isExaminee() && auth()->user()->limitReached($quiz->id))
+                          <a title="Gatnaş/Gör" href="{{ URL::route('quizzes.show', $quiz->id) }}" class="btn btn-success limit-reached"><i class="fa fa-file-o"></i></a>
+                          @else
                           <a title="Gatnaş/Gör" href="{{ URL::route('quizzes.show', $quiz->id) }}" class="btn btn-success"><i class="fa fa-file-o"></i></a>
+                          @endif
                           <a title="Gatnaşanlar" href="#" class="btn btn-success"><i class="fa fa-users"></i></a>
                         </div>
                       </td>
