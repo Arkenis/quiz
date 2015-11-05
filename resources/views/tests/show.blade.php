@@ -53,7 +53,7 @@
                     <div class="col-md-4 center-margin" style="float:none">
                       <div class="col-md-7 b-grey b-r">
                         <p class="hinted-text text-left p-t-15 p-b-t-15">Bahasy:
-                          <br>{{ (100 / $test->results->count()) * $test->score }} / {{ (100) }}</p>
+                          <br>{{ $test->results->count() > 0 ? (100 / $test->results->count()) * $test->score : 0 }} / {{ (100) }}</p>
                       </div>
                       <div class="col-md-5">
                         <p class="hinted-text text-left p-t-15 p-b-t-15 p-l-10">
