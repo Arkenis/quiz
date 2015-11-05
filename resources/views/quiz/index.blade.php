@@ -80,13 +80,10 @@
                       <a title="Poz" href="{{ route('quizzes.destroy', $quiz->id) }}" class="btn btn-success"><i class="fa fa-trash"></i></a>
                       @endif
 
-                      @if (auth()->user()->isExaminee() && auth()->user()->limitReached($quiz->id))
-                      <a title="Gatnaş/Gör" href="{{ route('quizzes.show', $quiz->id) }}" class="btn btn-success limit-reached"><i class="fa fa-file-o"></i></a>
-                      @else
                       <a title="Gatnaş/Gör" href="{{ route('quizzes.show', $quiz->id) }}" class="btn btn-success"><i class="fa fa-file-o"></i></a>
-                      @endif
+                      @if (auth()->user()->isAdmin() || auth()->user()->isExaminer())
                       <a title="Gatnaşanlar" href="{{ route('quizzes.examinees', $quiz->id) }}" class="btn btn-success"><i class="fa fa-users"></i></a>
-
+                      @endif
                     </div>
                   </td>
                 </tr>

@@ -16,8 +16,20 @@ class QuizController extends Controller
      */
     public function index()
     {
-        $quizzes = Quiz::latest()->get();
         $user = User::find(Auth::id());
+        if ($user->isExaminer()) {
+            $quizzes = Quiz::where('user_id', $user->id)
+                ->latest()
+                ->get();
+        } else if ($user->isExaminee()) {
+            $quizzes = $user->availableQuizzes()
+                ->latest()
+                ->get();
+        } else {
+            $quizzes = Quiz::latest()
+                ->get();
+        }
+
         return view('quiz.index', compact('quizzes', 'user'));
     }
 

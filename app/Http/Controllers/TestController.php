@@ -140,14 +140,36 @@ class TestController extends Controller
 
     public function examinees()
     {
-        $examinees = User::has('tests')->get();
+        $user = auth()->user();
 
+        if ($user->isExaminer()) {
+            $examinees = User::whereHas('tests',
+                function($query) use ($user)
+                {
+                    $query->where('user_id', $user->id);
+                })
+                ->get();
+        } else if ($user->isExaminee()) {
+            $examinees = User::where('id', $user->id)
+                ->get();
+        } else {
+            $examinees = User::has('tests')->get();
+        }
         return view('tests.examinees', compact('examinees'));
     }
 
     public function examineeTests(User $examinee)
     {
-        $tests = $examinee->tests()->latest()->get();
+        $user = auth()->user();
+
+        if ($user->isExaminer()) {
+            $tests = $examinee->tests()
+                ->where('user_id', $user->id)
+                ->latest()
+                ->get();
+        } else {
+            $tests = $examinee->tests()->latest()->get();
+        }
         return view('tests.byexaminee', compact('tests', 'examinee'));
     }
 }
