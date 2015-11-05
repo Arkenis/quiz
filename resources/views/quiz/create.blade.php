@@ -97,7 +97,7 @@
 <script type="text/javascript">
   $(function() {
     var i = 2;
-    $('.wysiwyg').wysihtml5();
+    //$('.wysiwyg').wysihtml5();
 
     $('.btn-new-question').click(function() {
 
@@ -110,7 +110,7 @@
       }).done(function(data) {
         $(data).insertAfter('.question:last');
         i++;
-        $('.wysiwyg').wysihtml5();
+        //$('.wysiwyg').wysihtml5();
         //console.log(i);
       });
     });
