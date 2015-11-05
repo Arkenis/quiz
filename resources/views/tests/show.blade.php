@@ -52,8 +52,8 @@
                   <div class="panel-body">
                     <div class="col-md-4 center-margin" style="float:none">
                       <div class="col-md-7 b-grey b-r">
-                        <p class="hinted-text text-left p-t-15 p-b-t-15">Siziň balyňyz:
-                          <br>{{ $test->score * 10 }} / {{ $test->results->count() * 10 }}</p>
+                        <p class="hinted-text text-left p-t-15 p-b-t-15">Bahasy:
+                          <br>{{ (100 / $test->results->count()) * $test->score }} / {{ (100) }}</p>
                       </div>
                       <div class="col-md-5">
                         <p class="hinted-text text-left p-t-15 p-b-t-15 p-l-10">
@@ -63,14 +63,12 @@
                     </div>
                     <div class="row">
                       <div class="col-sm-10">
-                        {!! Form::open(['route' => 'tests.store']) !!}
-
                         @foreach($quiz->questions as $i => $question)
                         <?php if ( ! in_array($question->id, array_pluck($results, 'question_id'))) continue; ?>
                         <div class="form-group">
                           <div class="panel panel-transparent">
                             <div class="panel-heading">
-                              <div class="panel-title">{!! ($i + 1) . '. ' . $question->text !!}</div>
+                              <div class="panel-title">{!! ($i + 1) . ') ' . $question->text !!}</div>
                             </div>
                             <div class="panel-body">
                               <div class="row-fluid">
@@ -94,15 +92,6 @@
                           </div>
                         </div>
                         @endforeach
-
-                        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
-                        <input type="hidden" name="quiz_id" value="{{ $quiz->id }}">
-
-                        {!! Form::submit('Göýber', ['class' => 'btn btn-primary']) !!}
-
-                        {!! Form::token() !!}
-
-                        {!! Form::close() !!}
                       </div>
                     </div>
                   </div>

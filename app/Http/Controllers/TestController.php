@@ -6,6 +6,7 @@ use App\Answer;
 use App\Quiz;
 use App\Result;
 use App\Test;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
@@ -56,7 +57,7 @@ class TestController extends Controller
                     'question_id' => $question->id,
                     'answer_id'   => $request->get($question->id)
                 ]);
-                
+
                 $answer = Answer::find($request->get($question->id));
 
                 if ($answer->correct) {
@@ -135,5 +136,18 @@ class TestController extends Controller
     public function result(Test $test)
     {
         return view('tests.result', compact('test'));
+    }
+
+    public function examinees()
+    {
+        $examinees = User::has('tests')->get();
+
+        return view('tests.examinees', compact('examinees'));
+    }
+
+    public function examineeTests(User $examinee)
+    {
+        $tests = $examinee->tests()->latest()->get();
+        return view('tests.byexaminee', compact('tests', 'examinee'));
     }
 }

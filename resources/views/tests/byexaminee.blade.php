@@ -15,8 +15,8 @@
       <div class="container-fluid container-fixed-lg">
         <!-- START BREADCRUMB -->
         <ul class="breadcrumb">
-          <li><a href="#">OKUWÇYLAR</a></li>
-          <li><a href="#" class="active">OKUWÇYLAR</a></li>
+          <li><a href="#">{{ $examinee->name }}</a></li>
+          <li><a href="#" class="active">GATNAŞAN SYNAGLARY</a></li>
         </ul>
         <!-- END BREADCRUMB -->
       </div>
@@ -31,27 +31,27 @@
                 <thead>
                   <tr role="row">
                     <th style="width: 2%;">#</th>
-                    <th style="width: 20%;">Temasy</th>
-                    <th style="width: 20%;">Jemi gatnaşan synag sany</th>
+                    <th style="width: 20%;">Synagnama</th>
+                    <th style="width: 20%;">Bahasy</th>
                     <th style="width: 30%; text-align:right">Gör</th>
                   </tr>
                 </thead>
                 <tbody>
 
-                @foreach ($examinees as $key => $examinee)
+                @foreach ($tests as $key => $test)
                 <tr role="row" class="odd">
                   <td class="v-align-middle">
                     <p>{{ $key + 1 }}</p>
                   </td>
                   <td class="v-align-middle">
-                    <p>{{ $examinee->name }}</p>
+                    <p>{{ $test->quiz->subject }}</p>
                   </td>
                   <td class="v-align-middle">
-                    <p>{{ $examinee->tests()->count() }}</p>
+                    <p>{{ $test->score }}</p>
                   </td>
                   <td align="right">
                     <div class="btn-group">
-                      <a title="Üýtget" href="{{ route('tests.examinees.tests', $examinee->id) }}" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                      <a title="Üýtget" href="{{ route('tests.show', $test->id) }}" class="btn btn-success"><i class="fa fa-eye"></i></a>
                     </div>
                   </td>
                 </tr>

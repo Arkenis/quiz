@@ -23,6 +23,16 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'TestController@result'
     ]);
 
+    Route::get('/tests/examinees/all', [
+        'as'   => 'tests.examinees',
+        'uses' => 'TestController@examinees'
+    ]);
+
+    Route::get('/tests/examinees/{examinee}', [
+        'as'   => 'tests.examinees.tests',
+        'uses' => 'TestController@examineeTests'
+    ]);
+
     Route::get('/question', function() {
         $i = Input::get('question_number');
 
