@@ -29,7 +29,7 @@
             <!-- START PANEL -->
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <table>
+                    <table class="test-result">
                         <tr>
                             <td>
                                 <p>Okuwçy:</p>
@@ -51,7 +51,7 @@
                                 <p>Dogry/Ýalňyş:</p>
                             </td>
                             <td>
-                                <p>{{ $test->quiz->subject }}</p>
+                                <p>{{ $test->score . '/' . (count($test->results) - $test->score)  }}</p>
                             </td>
                         </tr>
                         <tr>
@@ -62,6 +62,16 @@
                                 <p>{{ $test->created_at->format('d/m/Y') }}</p>
                             </td>
                         </tr>
+                        @foreach($test->results as $key => $result)
+                          <tr>
+                            <td>
+                              <p>{{ $key + 1 }}</p>
+                            </td>
+                            <td>
+                              <p>{{ $result->getAnswer->correct ? 'Dogry' : 'Ýalňyş' }}</p>
+                            </td>
+                          </tr>
+                        @endforeach
 
                     </table>
                 </div>

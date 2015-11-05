@@ -9,3 +9,11 @@
 .wysihtml5-sandbox {
     height: 150px !important;
 }
+
+.test-result p {
+    padding: 5px 20px;
+}
+
+.test-result tr > td:first-child p {
+    font-weight: bold;
+}
