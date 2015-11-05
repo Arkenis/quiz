@@ -143,10 +143,14 @@ class TestController extends Controller
         $user = auth()->user();
 
         if ($user->isExaminer()) {
+            $quizzes = Quiz::with('tests')
+                ->where('user_id', $user->id)
+                ->lists('id');
+
             $examinees = User::whereHas('tests',
-                function($query) use ($user)
+                function($query) use ($quizzes)
                 {
-                    $query->where('user_id', $user->id);
+                    $query->whereIn('quiz_id', $quizzes);
                 })
                 ->get();
         } else if ($user->isExaminee()) {
@@ -163,8 +167,12 @@ class TestController extends Controller
         $user = auth()->user();
 
         if ($user->isExaminer()) {
-            $tests = $examinee->tests()
+            $quizzes = Quiz::with('tests')
                 ->where('user_id', $user->id)
+                ->lists('id');
+
+            $tests = $examinee->tests()
+                ->whereIn('quiz_id', $quizzes)
                 ->latest()
                 ->get();
         } else {
