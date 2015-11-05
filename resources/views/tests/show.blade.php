@@ -29,7 +29,6 @@
 
             <!-- START CONTAINER FLUID -->
             <div class="container-fluid container-fixed-lg">
-
               @if (count($errors) > 0)
               <div class="alert alert-danger">
                 <ul>
@@ -40,58 +39,75 @@
               </div>
               @endif
 
-                <!-- START PANEL -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="panel-title">
-                          {{ $quiz->subject }}
-                        </div>
-                        <p class="pull-right">Gatnaşan okuwçy: {{ $test->getName() }}</p>
-                        <hr>
+              <!-- START PANEL -->
+              <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <div class="panel-title">
+                      {{ $quiz->subject }}
                     </div>
+                    <p class="pull-right">Gatnaşan okuwçy: {{ $test->getName() }}</p>
+                    <hr>
+                  </div>
 
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-sm-10">
-                              {!! Form::open(['route' => 'tests.store']) !!}
+                  <div class="panel-body">
+                    <div class="col-md-4 center-margin" style="float:none">
+                      <div class="col-md-7 b-grey b-r">
+                        <p class="hinted-text text-left p-t-15 p-b-t-15">Siziň balyňyz:
+                          <br>{{ $test->score * 10 }} / {{ $test->results->count() * 10 }}</p>
+                      </div>
+                      <div class="col-md-5">
+                        <p class="hinted-text text-left p-t-15 p-b-t-15 p-l-10">
+                          Dogry : {{ $test->score }}
+                          <br>Ýalňyş: {{ $test->results->count() - $test->score }}</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-10">
+                        {!! Form::open(['route' => 'tests.store']) !!}
 
-                              @foreach($quiz->questions as $i => $question)
-                                <div class="form-group">
-                                  <div class="panel panel-transparent">
-                                    <div class="panel-heading">
-                                      <div class="panel-title">{{ ($i + 1) . '. ' . $question->text }}</div>
-                                    </div>
-                                    <div class="panel-body">
-                                      <div class="row-fluid">
-                                        <div class="radio radio-success">
-                                        @for ($j = 0; $j < sizeof($question->answers) / 4; $j += 1)
-                                        @for ($k = 0; $k < 4 && (4 * $j + $k < sizeof($question->answers)); $k += 1)
-                                          <div class="col-xs-12">
-                                            <input type="radio" value="{{ $question->answers[4 * $j + $k]->id }}" name="{{ $question->id }}" id="{{ $question->answers[4 * $j + $k]->id }}" aria-invalid="false">
-                                            <label for="{{ $question->answers[4 * $j + $k]->id }}">{{ chr(65 + $k) . '. ' . $question->answers[4 * $j + $k]->text }}</label>
-                                          </div>
-                                        @endfor
-                                        @endfor
-                                        </div>
-                                      </div>
+                        @foreach($quiz->questions as $i => $question)
+                        <?php if ( ! in_array($question->id, array_pluck($results, 'question_id'))) continue; ?>
+                        <div class="form-group">
+                          <div class="panel panel-transparent">
+                            <div class="panel-heading">
+                              <div class="panel-title">{!! ($i + 1) . '. ' . $question->text !!}</div>
+                            </div>
+                            <div class="panel-body">
+                              <div class="row-fluid">
+
+                                <div class="radio radio-success">
+                                  @for ($j = 0; $j < sizeof($question->answers) / 4; $j += 1)
+                                  @for ($k = 0; $k < 4 && (4 * $j + $k < sizeof($question->answers)); $k += 1)
+                                  <div class="col-xs-12">
+                                    <div class="checkbox check-{{ (array_key_exists($question->id, $qa) && ($qa[$question->id] == $question->answers[4 * $j + $k]->id) && ! $question->answers[4 * $j + $k]->correct ) ? 'danger' : 'success'  }}">
+                                      <input disabled type="checkbox" id="{{ $question->answers[4 * $j + $k]->id }}" 
+                                      {{ $question->answers[4 * $j + $k]->correct ? 'checked' : '' }}
+                                      {{ (array_key_exists($question->id, $qa) && $qa[$question->id] == $question->answers[4 * $j + $k]->id) ? 'checked' : ''  }}>
+                                      <label for="{{ $question->answers[4 * $j + $k]->id }}">{{ chr(65 + $k) . '. ' . $question->answers[4 * $j + $k]->text }}</label>
                                     </div>
                                   </div>
+                                  @endfor
+                                  @endfor
                                 </div>
-                              @endforeach
-
-                              <input type="hidden" name="user_id" value="{{ Auth::id() }}">
-                              <input type="hidden" name="quiz_id" value="{{ $quiz->id }}">
-
-                              {!! Form::submit('Göýber', ['class' => 'btn btn-primary']) !!}
-
-                              {!! Form::token() !!}
-
-                              {!! Form::close() !!}
+                              </div>
                             </div>
+                          </div>
                         </div>
+                        @endforeach
+
+                        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                        <input type="hidden" name="quiz_id" value="{{ $quiz->id }}">
+
+                        {!! Form::submit('Göýber', ['class' => 'btn btn-primary']) !!}
+
+                        {!! Form::token() !!}
+
+                        {!! Form::close() !!}
+                      </div>
                     </div>
-                </div>
-                <!-- END PANEL -->
+                  </div>
+              </div>
+              <!-- END PANEL -->
             </div>
             <!-- END CONTAINER FLUID -->
         </div>

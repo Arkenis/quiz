@@ -8,9 +8,19 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('tests', 'TestController');
     Route::resource('quizzes', 'QuizController');
 
-    Route::get('/quizzes/{quizzes}/matching', [
-        'as'   => 'quizzes.matching',
-        'uses' => 'QuizController@match'
+    Route::get('/quizzes/{quizzes}/examinees', [
+        'as'   => 'quizzes.examinees',
+        'uses' => 'QuizController@examinees'
+    ]);
+
+    Route::post('/quizzes/{quizzes}/examinees/add', [
+        'as'   => 'quizzes.examinees.add',
+        'uses' => 'QuizController@addExaminee'
+    ]);
+
+    Route::get('/tests/{tests}/result', [
+        'as'   => 'tests.result',
+        'uses' => 'TestController@result'
     ]);
 
     Route::get('/question', function() {

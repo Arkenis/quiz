@@ -1,9 +1,11 @@
 <?php namespace App\Http\Controllers;
 
 use App\Quiz;
+use App\Test;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class QuizController extends Controller
 {
@@ -73,9 +75,22 @@ class QuizController extends Controller
      */
     public function show(Quiz $quiz)
     {
+        if (auth()->user()->limitReached($quiz->id)) {
+            return Redirect::route('quizzes.index')->with('limit_reached', true);
+        }
+
         $choices = ['A', 'B', 'C', 'D'];
 
-        return view('quiz.show', compact('quiz', 'choices'));
+        $all_questions = $quiz->questions()->orderBy('id')->get()->toArray();
+
+        $questions = array_map(
+            function($key) use ($quiz) {
+                return $quiz->questions[$key];
+            },
+            array_rand($all_questions, min(10, sizeof($all_questions)))
+        );
+
+        return view('quiz.show', compact('quiz', 'questions', 'choices'));
     }
 
     /**
@@ -133,6 +148,25 @@ class QuizController extends Controller
     public function destroy(Quiz $quiz)
     {
         $quiz->delete();
+
+        return redirect()->back();
+    }
+
+    public function examinees(Quiz $quiz)
+    {
+        $examinees = User::whereType('examinee')->get();
+
+        return view('quiz.examinees', compact('quiz', 'examinees'));
+    }
+
+    public function addExaminee(Quiz $quiz, Request $request)
+    {
+        $quiz->examinees()->detach();
+
+        foreach ($request->get('examinees', []) as $id)
+        {
+            $quiz->examinees()->attach($id);
+        }
 
         return redirect()->back();
     }
