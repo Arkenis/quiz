@@ -69,13 +69,13 @@
                                             <p>{{ $user->username }}</p>
                                         </td>
                                         <td class="v-align-middle">
-                                            <p>{{ $user->type }}</p>
+                                            <p>{{ $user->translatedType }}</p>
                                         </td>
                                         <td class="v-align-middle">
-                                            <p>{{ $user->created_at }}</p>
+                                            <p>{{ $user->created_at->format('H:i:s | d-m-Y') }}</p>
                                         </td>
                                         <td class="v-align-middle">
-                                            <p>{{ $user->updated_at }}</p>
+                                            <p>{{ $user->updated_at->format('H:i:s | d-m-Y') }}</p>
                                         </td>
                                         <td class="v-align-middle">
                                             <div class="btn-group">

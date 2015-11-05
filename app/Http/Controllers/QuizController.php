@@ -1,7 +1,11 @@
 <?php namespace App\Http\Controllers;
 
 use App\Quiz;
+use App\Test;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class QuizController extends Controller
 {
@@ -12,8 +16,21 @@ class QuizController extends Controller
      */
     public function index()
     {
-        $quizzes = Quiz::latest()->get();
-        return view('quiz.index', compact('quizzes'));
+        $user = User::find(Auth::id());
+        if ($user->isExaminer()) {
+            $quizzes = Quiz::where('user_id', $user->id)
+                ->latest()
+                ->get();
+        } else if ($user->isExaminee()) {
+            $quizzes = $user->availableQuizzes()
+                ->latest()
+                ->get();
+        } else {
+            $quizzes = Quiz::latest()
+                ->get();
+        }
+
+        return view('quiz.index', compact('quizzes', 'user'));
     }
 
     /**
@@ -70,14 +87,22 @@ class QuizController extends Controller
      */
     public function show(Quiz $quiz)
     {
-        $choices = [
-            'A',
-            'B',
-            'C',
-            'D',
-        ];
+        if (auth()->user()->limitReached($quiz->id)) {
+            return Redirect::route('quizzes.index')->with('limit_reached', true);
+        }
 
-        return view('quiz.show', compact('quiz', 'choices'));
+        $choices = ['A', 'B', 'C', 'D'];
+
+        $all_questions = $quiz->questions()->orderBy('id')->get()->toArray();
+
+        $questions = array_map(
+            function($key) use ($quiz) {
+                return $quiz->questions[$key];
+            },
+            (array) array_rand($all_questions, min(10, sizeof($all_questions)))
+        );
+
+        return view('quiz.show', compact('quiz', 'questions', 'choices'));
     }
 
     /**
@@ -115,7 +140,7 @@ class QuizController extends Controller
 
             foreach ($question->answers as $answer)
             {
-                $answer->text = $q['answers'][$answer->id];
+                $answer->text    = $q['answers'][$answer->id];
                 $answer->correct = ($q['correct_answer'] == $answer->id);
                 $answer->save();
             }
@@ -135,6 +160,25 @@ class QuizController extends Controller
     public function destroy(Quiz $quiz)
     {
         $quiz->delete();
+
+        return redirect()->back();
+    }
+
+    public function examinees(Quiz $quiz)
+    {
+        $examinees = User::whereType('examinee')->get();
+
+        return view('quiz.examinees', compact('quiz', 'examinees'));
+    }
+
+    public function addExaminee(Quiz $quiz, Request $request)
+    {
+        $quiz->examinees()->detach();
+
+        foreach ($request->get('examinees', []) as $id)
+        {
+            $quiz->examinees()->attach($id);
+        }
 
         return redirect()->back();
     }

@@ -21,6 +21,7 @@
     <link href="{!! asset('pages/assets/plugins/boostrapv3/css/bootstrap.min.css') !!}" rel="stylesheet" type="text/css" />
     <link href="{!! asset('pages/assets/plugins/font-awesome/css/font-awesome.css') !!}" rel="stylesheet" type="text/css" />
     <link href="{!! asset('pages/assets/plugins/jquery-scrollbar/jquery.scrollbar.css') !!}" rel="stylesheet" type="text/css" media="screen" />
+    <link href="{!! asset('pages/assets/plugins/bootstrap-select2/select2.css') !!}" rel="stylesheet" type="text/css" media="screen" />
     <link href="{!! asset('pages/pages/css/pages-icons.css') !!}" rel="stylesheet" type="text/css">
     <link href="{!! asset('pages/pages/css/pages.css') !!}" class="main-stylesheet" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/quiz.css') }}">
@@ -33,9 +34,9 @@
     <script type="text/javascript">
         window.onload = function()
         {
-            // fix for windows 8
-            if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
-                document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="{!! asset('pages/pages/css/windows.chrome.fix.css') !!}" />'
+          // fix for windows 8
+          if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
+              document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="{!! asset('pages/pages/css/windows.chrome.fix.css') !!}" />'
         }
     </script>
 </head>
@@ -51,6 +52,7 @@
 <script src="{!! asset('pages/assets/plugins/modernizr.custom.js') !!}" type="text/javascript"></script>
 <script src="{!! asset('pages/assets/plugins/boostrapv3/js/bootstrap.min.js') !!}" type="text/javascript"></script>
 <script src="{!! asset('pages/assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js') !!}"></script>
+<script src="{!! asset('pages/assets/plugins/bootstrap-select2/select2.min.js') !!}" type="text/javascript"></script>
 <!-- END VENDOR JS -->
 
 <!-- BEGIN CORE TEMPLATE JS -->

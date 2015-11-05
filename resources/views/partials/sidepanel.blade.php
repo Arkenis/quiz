@@ -23,7 +23,7 @@
             <span class="icon-thumbnail"><i class="fa fa-th"></i></span>
           </li>
           <li class="m-t-5 ">
-            <a href="{{ route('tests.index') }}">
+            <a href="{{ route('tests.examinees') }}">
               <span class="title">Netijeler</span>
             </a>
             <span class="icon-thumbnail"><i class="fa fa-navicon"></i></span>

@@ -6,11 +6,9 @@ use App\Answer;
 use App\Quiz;
 use App\Result;
 use App\Test;
+use App\User;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Redirect;
 
 class TestController extends Controller
 {
@@ -21,7 +19,7 @@ class TestController extends Controller
      */
     public function index()
     {
-        $tests = Test::get();
+        $tests = Test::latest()->get();
         return view('tests.index', compact('tests'));
     }
 
@@ -43,12 +41,7 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        // die;
-
         $test = Test::create($request->all());
-
-        //dd($test->id);
 
         $score = 0;
 
@@ -56,8 +49,6 @@ class TestController extends Controller
         foreach ($quiz->questions as $question)
         {
             if ($request->has($question->id)) {
-                // dd($request->all(), $question->id);
-                // die;
 
                 $result = Result::create([
                     'quiz_id'     => $request->get('quiz_id'),
@@ -66,7 +57,7 @@ class TestController extends Controller
                     'question_id' => $question->id,
                     'answer_id'   => $request->get($question->id)
                 ]);
-                
+
                 $answer = Answer::find($request->get($question->id));
 
                 if ($answer->correct) {
@@ -78,20 +69,27 @@ class TestController extends Controller
         $test->score = $score;
         $test->save();
 
-        return Redirect::route('quizzes.index');
+        return redirect()->route('tests.result', $test);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Test $test
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function show($id)
+    public function show(Test $test)
     {
-        $test = Test::findOrFail($id);
+        $quiz = $test->quiz;
+        $results = $test->results;
 
-        return view('tests.show', compact('test'));
+        $q = array_pluck($results->toArray(), 'question_id');
+        $a = array_pluck($results->toArray(), 'answer_id');
+
+        $qa = array_combine($q, $a);
+
+        return view('tests.show', compact('test', 'quiz', 'results', 'qa'));
     }
 
     /**
@@ -120,11 +118,66 @@ class TestController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Test $test
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function destroy($id)
+    public function destroy(Test $test)
     {
-        //
+        $test->destroy();
+    }
+
+    /**
+     * Show results summary after submitting test
+     *
+     * @param Test $test
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function result(Test $test)
+    {
+        return view('tests.result', compact('test'));
+    }
+
+    public function examinees()
+    {
+        $user = auth()->user();
+
+        if ($user->isExaminer()) {
+            $quizzes = Quiz::with('tests')
+                ->where('user_id', $user->id)
+                ->lists('id');
+
+            $examinees = User::whereHas('tests',
+                function($query) use ($quizzes)
+                {
+                    $query->whereIn('quiz_id', $quizzes);
+                })
+                ->get();
+        } else if ($user->isExaminee()) {
+            $examinees = User::where('id', $user->id)
+                ->get();
+        } else {
+            $examinees = User::has('tests')->get();
+        }
+        return view('tests.examinees', compact('examinees'));
+    }
+
+    public function examineeTests(User $examinee)
+    {
+        $user = auth()->user();
+
+        if ($user->isExaminer()) {
+            $quizzes = Quiz::with('tests')
+                ->where('user_id', $user->id)
+                ->lists('id');
+
+            $tests = $examinee->tests()
+                ->whereIn('quiz_id', $quizzes)
+                ->latest()
+                ->get();
+        } else {
+            $tests = $examinee->tests()->latest()->get();
+        }
+        return view('tests.byexaminee', compact('tests', 'examinee'));
     }
 }

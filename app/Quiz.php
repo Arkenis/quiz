@@ -18,4 +18,9 @@ class Quiz extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function examinees()
+    {
+        return $this->belongsToMany('App\User');
+    }
 }

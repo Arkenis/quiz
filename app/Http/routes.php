@@ -8,6 +8,31 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('tests', 'TestController');
     Route::resource('quizzes', 'QuizController');
 
+    Route::get('/quizzes/{quizzes}/examinees', [
+        'as'   => 'quizzes.examinees',
+        'uses' => 'QuizController@examinees'
+    ]);
+
+    Route::post('/quizzes/{quizzes}/examinees/add', [
+        'as'   => 'quizzes.examinees.add',
+        'uses' => 'QuizController@addExaminee'
+    ]);
+
+    Route::get('/tests/{tests}/result', [
+        'as'   => 'tests.result',
+        'uses' => 'TestController@result'
+    ]);
+
+    Route::get('/tests/examinees/all', [
+        'as'   => 'tests.examinees',
+        'uses' => 'TestController@examinees'
+    ]);
+
+    Route::get('/tests/examinees/{examinee}', [
+        'as'   => 'tests.examinees.tests',
+        'uses' => 'TestController@examineeTests'
+    ]);
+
     Route::get('/question', function() {
         $i = Input::get('question_number');
 
@@ -16,4 +41,3 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/', ['uses' => 'QuizController@index']);
 });
-
