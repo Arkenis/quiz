@@ -87,7 +87,7 @@ class QuizController extends Controller
             function($key) use ($quiz) {
                 return $quiz->questions[$key];
             },
-            array_rand($all_questions, min(10, sizeof($all_questions)))
+            (array) array_rand($all_questions, min(10, sizeof($all_questions)))
         );
 
         return view('quiz.show', compact('quiz', 'questions', 'choices'));
