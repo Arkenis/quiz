@@ -75,7 +75,7 @@
                   </td>
                   <td align="right">
                     <div class="btn-group">
-                      @if (auth()->user()->isAdmin())
+                      @if (auth()->user()->isAdmin() || auth()->user()->isExaminer())
                       <a title="Üýtget" href="{{ route('quizzes.edit', $quiz->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
                       <a title="Poz" href="{{ route('quizzes.destroy', $quiz->id) }}" class="btn btn-success"><i class="fa fa-trash"></i></a>
                       @endif
