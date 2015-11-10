@@ -66,6 +66,10 @@ class QuizController extends Controller
 
             $answers = $q['answers'];
 
+            if ( ! array_key_exists('correct_answer', $q)) {
+                $q['correct_answer'] = 0;
+            }
+
             foreach (range(0, 3) as $i)
             {
                 $question->answers()->create([
