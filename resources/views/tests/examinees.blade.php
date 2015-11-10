@@ -15,7 +15,7 @@
       <div class="container-fluid container-fixed-lg">
         <!-- START BREADCRUMB -->
         <ul class="breadcrumb">
-          <li><a href="#">OKUWÇYLAR</a></li>
+          <li><a href="#">SYNAG NETIJELERI</a></li>
           <li><a href="#" class="active">OKUWÇYLAR</a></li>
         </ul>
         <!-- END BREADCRUMB -->
@@ -31,7 +31,7 @@
                 <thead>
                   <tr role="row">
                     <th style="width: 2%;">#</th>
-                    <th style="width: 20%;">Temasy</th>
+                    <th style="width: 20%;">OKYWÇY</th>
                     <th style="width: 20%;">Jemi gatnaşan synag sany</th>
                     <th style="width: 30%; text-align:right">Gör</th>
                   </tr>

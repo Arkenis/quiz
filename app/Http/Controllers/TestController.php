@@ -153,6 +153,7 @@ class TestController extends Controller
                     $query->whereIn('quiz_id', $quizzes);
                 })
                 ->get();
+
         } else if ($user->isExaminee()) {
             $examinees = User::where('id', $user->id)
                 ->get();
