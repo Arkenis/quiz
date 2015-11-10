@@ -185,6 +185,22 @@ class QuizController extends Controller
      */
     public function destroy(Quiz $quiz)
     {
+        foreach ($quiz->tests as $test)
+        {
+            foreach ($test->results as $result)
+            {
+                $result->delete();
+            }
+
+            $test->delete();
+        }
+
+        foreach ($quiz->questions as $question)
+        {
+            $question->answers()->delete();
+        }
+
+        $quiz->questions()->delete();
         $quiz->delete();
 
         return redirect()->back();

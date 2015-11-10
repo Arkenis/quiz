@@ -23,4 +23,10 @@ class Quiz extends Model
     {
         return $this->belongsToMany('App\User');
     }
+
+    public function tests()
+    {
+        return $this->hasMany('App\Test');
+    }
+
 }
