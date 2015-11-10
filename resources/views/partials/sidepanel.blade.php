@@ -28,12 +28,16 @@
             </a>
             <span class="icon-thumbnail"><i class="fa fa-navicon"></i></span>
           </li>
+
+          @if (auth()->user()->isAdmin())
           <li class="m-t-5 ">
             <a href="{{ URL::route('users.index') }}">
               <span class="title">Ulanyjylar</span>
             </a>
             <span class="icon-thumbnail"><i class="fa fa-users"></i></span>
           </li>
+          @endif
+
           <li class="m-t-5 ">
             <a href="{{ url('auth/logout') }}">
               <span class="title">Çyk</span>
