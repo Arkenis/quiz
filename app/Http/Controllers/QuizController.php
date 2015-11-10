@@ -122,7 +122,7 @@ class QuizController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified quiz in database
      *
      * @param  Request $request
      * @param Quiz $quiz
@@ -137,7 +137,7 @@ class QuizController extends Controller
 
         foreach ($quiz->questions as $question)
         {
-            $q = $request->get('questions')[$question->id];
+            $q = $request->get('existingquestions')[$question->id];
 
             $question->text = $q['text'];
             $question->save();
@@ -147,6 +147,28 @@ class QuizController extends Controller
                 $answer->text    = $q['answers'][$answer->id];
                 $answer->correct = ($q['correct_answer'] == $answer->id);
                 $answer->save();
+            }
+        }
+
+        foreach ($request->get('questions') as $q)
+        {
+            $question = $quiz->questions()->create([
+                'text' => $q['text'],
+            ]);
+
+            $answers = $q['answers'];
+
+            if ( ! array_key_exists('correct_answer', $q)) {
+                $q['correct_answer'] = 0;
+            }
+
+            foreach (range(0, 3) as $i)
+            {
+                $question->answers()->create([
+                    'text'        => $answers[$i],
+                    'correct'     => ($i == $q['correct_answer']),
+                    'question_id' => $question->id,
+                ]);
             }
         }
 
