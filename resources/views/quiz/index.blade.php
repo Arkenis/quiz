@@ -48,6 +48,7 @@
                   <tr role="row">
                     <th style="width: 2%;">#</th>
                     <th style="width: 20%;">Temasy</th>
+                    <th style="width: 20%;">Sorag sany</th>
                     <th style="width: 20%;">Döreden</th>
                     <th style="width: 30%; text-align:right">
                       @if (auth()->user()->isAdmin())
@@ -69,6 +70,9 @@
                   </td>
                   <td class="v-align-middle">
                     <p>{{ $quiz->subject }}</p>
+                  </td>
+                  <td class="v-align-middle">
+                    <p>{{ $quiz->questions()->count() }}</p>
                   </td>
                   <td class="v-align-middle">
                     <p>{{ $quiz->user->name }}</p>
