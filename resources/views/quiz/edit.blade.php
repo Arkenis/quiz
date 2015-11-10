@@ -80,7 +80,7 @@
                             </div>
 
                             <div class="m-b-20" >
-                              {!! Form::textarea("questions[$question->id][text]", $question->text, ['class' => 'form-control wysiwyg demo-form-wysiwyg']) !!}
+                              {!! Form::textarea("existingquestions[$question->id][text]", $question->text, ['class' => 'form-control wysiwyg demo-form-wysiwyg']) !!}
                             </div>
                           </div>
                         </div>
@@ -90,10 +90,10 @@
                         <div class="form-group">
                           <label>{{ chr(65 + $j) }}.</label>
                           <span class="radio radio-success" style="display: inline;">
-                            <input type="radio" {{ ($answer->correct) ? 'checked' : '' }}  value="{{ $answer->id }}" name="questions[{{ $question->id }}][correct_answer]" id="{{ $i }}-{{ $j }}">
+                            <input type="radio" {{ ($answer->correct) ? 'checked' : '' }}  value="{{ $answer->id }}" name="existingquestions[{{ $question->id }}][correct_answer]" id="{{ $i }}-{{ $j }}">
                             <label for="{{ $i }}-{{ $j }}">Dogry jogap</label>
                           </span>
-                          <input type="text" value="{{ $answer->text }}" name="questions[{{ $question->id }}][answers][{{$answer->id}}]" class="form-control" required>
+                          <input type="text" value="{{ $answer->text }}" name="existingquestions[{{ $question->id }}][answers][{{$answer->id}}]" class="form-control" required>
                         </div>
                         @endforeach
 
@@ -131,7 +131,7 @@
 <script src="{{ asset('pages/assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <script type="text/javascript">
 $(function() {
-  var i = 2;
+  var i = "{{ $quiz->questions()->count() + 1 }}";
   $('.wysiwyg').wysihtml5();
 
   $('.btn-new-question').click(function() {
