@@ -11,6 +11,8 @@
     <link rel="apple-touch-icon" sizes="120x120" href="pages/ico/120.png">
     <link rel="apple-touch-icon" sizes="152x152" href="pages/ico/152.png">
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link media="screen" type="text/css" rel="stylesheet" href="/pages/assets/plugins/nvd3/nv.d3.min.css"></link>
+    <link type="text/css" rel="stylesheet" href="/pages/assets/plugins/rickshaw/rickshaw.min.css"></link>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -25,6 +27,29 @@
     <link href="{!! asset('pages/pages/css/pages-icons.css') !!}" rel="stylesheet" type="text/css">
     <link href="{!! asset('pages/pages/css/pages.css') !!}" class="main-stylesheet" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/quiz.css') }}">
+
+    <style>
+        #chart_container {
+            display: inline-block;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #chart {
+            float: left;
+        }
+        #legend {
+            float: left;
+            margin-left: 15px;
+        }
+        #offset_form {
+            float: left;
+            margin: 2em 0 0 15px;
+            font-size: 13px;
+        }
+        #y_axis {
+            float: left;
+            width: 40px;
+        }
+    </style>
 
     @yield('page_css')
 
@@ -47,6 +72,16 @@
 @yield('page_content')
 
 <!-- BEGIN VENDOR JS -->
+<script src="/pages/assets/plugins/d3/d3.min.js"></script>
+<script src="/pages/assets/plugins/rickshaw/rickshaw.min.js"></script>
+<script type="text/javascript" src="/pages/assets/plugins/nvd3/lib/d3.v3.js"></script>
+<script type="text/javascript" src="/pages/assets/plugins/nvd3/nv.d3.min.js"></script>
+<script type="text/javascript" src="/pages/assets/plugins/nvd3/src/utils.js"></script>
+<script type="text/javascript" src="/pages/assets/plugins/nvd3/src/tooltip.js"></script>
+<script type="text/javascript" src="/pages/assets/plugins/nvd3/src/interactiveLayer.js"></script>
+<script type="text/javascript" src="/pages/assets/plugins/nvd3/src/models/axis.js"></script>
+<script type="text/javascript" src="/pages/assets/plugins/nvd3/src/models/line.js"></script>
+<script type="text/javascript" src="/pages/assets/plugins/nvd3/src/models/lineWithFocusChart.js"></script>
 <script src="{!! asset('pages/assets/plugins/pace/pace.min.js') !!}" type="text/javascript"></script>
 <script src="{!! asset('pages/assets/plugins/jquery/jquery-1.11.1.min.js') !!}" type="text/javascript"></script>
 <script src="{!! asset('pages/assets/plugins/modernizr.custom.js') !!}" type="text/javascript"></script>
@@ -62,7 +97,6 @@
 <!-- BEGIN PAGE LEVEL JS -->
 @yield('page_scripts')
 <!-- END PAGE LEVEL JS -->
-
 
 </body>
 </html>

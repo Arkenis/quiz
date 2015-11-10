@@ -21,7 +21,15 @@
         <!-- END BREADCRUMB -->
       </div>
       <!-- END CONTAINER FLUID -->
-
+      <div class="container-fluid container-fixed-lg bg-white">
+        <br>
+        <div id="chart_container">
+          <div id="y_axis"></div>
+          <div id="chart"></div>
+          <div id="legend"></div>
+          </form>
+        </div>
+      </div>
       <div class="container-fluid container-fixed-lg bg-white">
 
         <div class="panel panel-transparent">
@@ -41,13 +49,13 @@
                 @foreach ($tests as $key => $test)
                 <tr role="row" class="odd">
                   <td class="v-align-middle">
-                    <p>{{ $key + 1 }}</p>
+                    <p>{{ count($tests) - $key }}</p>
                   </td>
                   <td class="v-align-middle">
                     <p>{{ $test->quiz->subject }}</p>
                   </td>
                   <td class="v-align-middle">
-                    <p>{{ $test->score }}</p>
+                    <p>{{ $test->results->count() == 0 ? 0 : 100 * $test->score / $test->results->count() }}</p>
                   </td>
                   <td align="right">
                     <div class="btn-group">
@@ -73,5 +81,54 @@
   <!-- END PAGE CONTENT WRAPPER -->
 </div>
 <!-- END PAGE CONTAINER -->
+@stop
+
+@section('page_scripts')
+
+  <script>
+    var palette = new Rickshaw.Color.Palette();
+
+    var graph = new Rickshaw.Graph( {
+      element: document.querySelector("#chart"),
+      width: document.body.clientWidth - 300,
+      height: 240,
+      renderer: 'line',
+      series: [
+        {
+          name: "{{ $examinee->name }}",
+          data: [
+            @foreach ($examinee->tests as $key => $test)
+              {{ '{ x: ' . ($key + 1) . ', ' . 'y: ' . ($test->results->count() == 0 ? 0 : 100 * $test->score / $test->results->count()) . '},' }}
+            @endforeach
+          ],
+          color: palette.color()
+        },
+      ]
+    } );
+
+    var x_axis = new Rickshaw.Graph.Axis.X( {
+      graph: graph,
+      tickFormat: function(n) {
+        if (Math.ceil(n) != Math.floor(n))
+          return ' ';
+        return n;
+      },
+    } );
+
+    var y_axis = new Rickshaw.Graph.Axis.Y( {
+      graph: graph,
+      orientation: 'left',
+      tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+      element: document.getElementById('y_axis'),
+    } );
+
+    var legend = new Rickshaw.Graph.Legend( {
+      element: document.querySelector('#legend'),
+      graph: graph
+    } );
+
+    graph.render();
+
+  </script>
 
 @stop
