@@ -49,6 +49,16 @@
                     <hr>
                   </div>
 
+                <div class="container-fluid container-fixed-lg bg-white">
+                  <br>
+                  <div id="chart_container">
+                    <div id="y_axis"></div>
+                    <div id="chart"></div>
+                    <div id="legend"></div>
+                    </form>
+                  </div>
+                </div>
+
                   <div class="panel-body">
                     <div class="col-md-4 center-margin" style="float:none">
                       <div class="col-md-7 b-grey b-r">
@@ -113,7 +123,52 @@
 
 @stop
 @section('page_scripts')
-    <script type="text/javascript">
-        $('select').select2();
-    </script>
+  <script type="text/javascript">
+    $('select').select2();
+
+    var palette = new Rickshaw.Color.Palette();
+
+    var graph = new Rickshaw.Graph( {
+      element: document.querySelector("#chart"),
+      width: document.body.clientWidth - 300,
+      height: 240,
+      renderer: 'line',
+      series: [
+        {
+          name: "{{ $examinee->name }}",
+          data: [
+            @foreach ($tests as $key => $test)
+              {{ '{ x: ' . ($key + 1) . ', ' . 'y: ' . ($test->results->count() == 0 ? 0 : 100 * $test->score / $test->results->count()) . '},' }}
+            @endforeach
+          ],
+          color: palette.color()
+        },
+      ]
+    } );
+
+    var x_axis = new Rickshaw.Graph.Axis.X( {
+      graph: graph,
+      tickFormat: function(n) {
+        if (Math.ceil(n) != Math.floor(n))
+          return ' ';
+        return n;
+      },
+    } );
+
+    var y_axis = new Rickshaw.Graph.Axis.Y( {
+      graph: graph,
+      orientation: 'left',
+      tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+      element: document.getElementById('y_axis'),
+    } );
+
+    var legend = new Rickshaw.Graph.Legend( {
+      element: document.querySelector('#legend'),
+      graph: graph
+    } );
+
+    graph.render();
+
+  </script>
+
 @stop

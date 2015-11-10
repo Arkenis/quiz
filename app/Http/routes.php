@@ -8,6 +8,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('tests', 'TestController');
     Route::resource('quizzes', 'QuizController');
 
+    Route::get('/quizzes/{quizzes}/delete', [
+        'as' => 'quizzes.delete',
+        'uses' => 'QuizController@destroy'
+    ]);
+
     Route::get('/quizzes/{quizzes}/examinees', [
         'as'   => 'quizzes.examinees',
         'uses' => 'QuizController@examinees'

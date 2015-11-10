@@ -84,12 +84,18 @@ class TestController extends Controller
         $quiz = $test->quiz;
         $results = $test->results;
 
+        $examinee = \App\User::find($test->user_id);
+        $tests = $examinee->tests()
+            ->where('quiz_id', $quiz->id)
+            ->latest()
+            ->get();
+
         $q = array_pluck($results->toArray(), 'question_id');
         $a = array_pluck($results->toArray(), 'answer_id');
 
         $qa = array_combine($q, $a);
 
-        return view('tests.show', compact('test', 'quiz', 'results', 'qa'));
+        return view('tests.show', compact('test', 'quiz', 'results', 'qa', 'examinee', 'tests'));
     }
 
     /**
