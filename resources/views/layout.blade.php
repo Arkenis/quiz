@@ -49,6 +49,10 @@
             float: left;
             width: 40px;
         }
+        .container-fluid {
+            margin-top: 20px;
+            margin-bottom: -20px;
+        }
     </style>
 
     @yield('page_css')

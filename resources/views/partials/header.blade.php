@@ -1,5 +1,5 @@
       <!-- START HEADER -->
-      <div class="header ">
+      <div class="header " style="height:80px">
         <!-- START MOBILE CONTROLS -->
         <!-- LEFT SIDE -->
         <div class="pull-left full-height visible-sm visible-xs">
@@ -16,7 +16,7 @@
         <div class=" pull-left sm-table">
           <div class="header-inner">
             <div class="brand inline">
-              <img src="{!! asset('img/logo_dark.svg') !!}" alt="logo" data-src="{!! asset('img/logo_dark.svg') !!}" data-src-retina="{!! asset('img/logo_dark.svg') !!}" height="26" height="40">
+              <img src="{!! asset('img/logo_dark.svg') !!}" alt="logo" data-src="{!! asset('img/logo_dark.svg') !!}" data-src-retina="{!! asset('img/logo_dark.svg') !!}" height="70" style="padding-top:10px;padding-left:100px;">
             </div>
           </div>
         </div>

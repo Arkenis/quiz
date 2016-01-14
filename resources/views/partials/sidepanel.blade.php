@@ -3,7 +3,7 @@
 
       <!-- BEGIN SIDEBAR MENU HEADER-->
       <div class="sidebar-header" style="padding:0;">
-        <img src="{!! asset('img/logo_light.svg') !!}" alt="logo" class="brand" data-src="{!! asset('img/logo_light.svg') !!}" data-src-retina="{!! asset('img/logo_light.svg') !!}" height="22" style="padding-left:20px;">
+        <img src="{!! asset('img/logo_light.svg') !!}" alt="logo" class="brand" data-src="{!! asset('img/logo_light.svg') !!}" data-src-retina="{!! asset('img/logo_light.svg') !!}" height="40" style="padding-left:10px;">
         <div class="sidebar-header-controls">
           <button type="button" class="btn btn-link visible-lg-inline" data-toggle-pin="sidebar">
             <i class="fa fs-12"></i>
