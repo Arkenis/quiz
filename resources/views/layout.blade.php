@@ -53,6 +53,10 @@
             margin-top: 20px;
             margin-bottom: -20px;
         }
+
+        .btn .btn-primary {
+            background-color: #168f63;
+        }
     </style>
 
     @yield('page_css')

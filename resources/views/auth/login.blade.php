@@ -39,7 +39,9 @@
       <div class="container-sm-height full-height">
         <div class="row row-sm-height">
           <div class="col-sm-12 col-sm-height col-middle">
-            <h3 style="font-size: 21px;">Login</h3>
+            <p style="text-align:center;" stype="">
+              <img src="{!! asset('img/logо.svg') !!}" alt="logo" class="brand" data-src="{!! asset('img/logо.svg') !!}" data-src-retina="{!! asset('img/logо.svg') !!}" height="130" style="margin-top:-50px;margin-bottom:30px;">
+            </p>
             <p>
               <small></small>
             </p>
@@ -68,7 +70,7 @@
               </div>
               {!! Form::token() !!}
               
-              <button class="btn btn-primary btn-cons m-t-10" type="submit">Giriş</button>
+              <button class="btn btn-primary btn-cons m-t-10" type="submit" style="background-color: #168f63; border-color: #168f63;">Giriş</button>
             </form>
           </div>
         </div>
